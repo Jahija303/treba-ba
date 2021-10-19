@@ -14,8 +14,10 @@ class UserSeeder extends Seeder
             'email' => 'admin@treba.ba',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
-        ]);
+        ])->assignRole('super-admin');
 
-        User::factory(10)->create();
+        User::factory(10)->create()->each(function ($user) {
+            $user->assignRole('user');
+        });
     }
 }
