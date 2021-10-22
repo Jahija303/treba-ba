@@ -5,6 +5,14 @@
                 Dashboard
             </Link>
 
+            <div v-if="$page.props.user">
+                <form method="POST" @submit.prevent="logout">
+                    <jet-responsive-nav-link as="button">
+                        Log Out
+                    </jet-responsive-nav-link>
+                </form>
+            </div>
+
             <template v-else>
                 <Link :href="route('login')" class="text-sm text-gray-700 underline">
                     Log in
@@ -90,6 +98,12 @@
         components: {
             Head,
             Link,
+        },
+
+        methods: {
+            logout() {
+                this.$inertia.post(route('logout'));
+            },
         },
 
         props: {
