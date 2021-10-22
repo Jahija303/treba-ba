@@ -12,7 +12,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesAndPermissionsSeeder::class,
             UserSeeder::class,
-            CitySeeder::class
+            CitySeeder::class,
+            CategorySeeder::class,
+            DistrictSeeder::class
         ]);
     }
 }

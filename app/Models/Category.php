@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class City extends Model
+class Category extends Model
 {
     use HasFactory;
 
@@ -14,11 +13,5 @@ class City extends Model
         'name',
         'description',
         'status',
-        'population'
     ];
-
-    public function districts(): HasMany
-    {
-        return $this->hasMany(District::class);
-    }
 }
