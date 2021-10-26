@@ -14,7 +14,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CitySeeder::class,
             CategorySeeder::class,
-            DistrictSeeder::class
+            DistrictSeeder::class,
+            IssueSeeder::class,
+            IssueCommentSeeder::class,
+            LikeSeeder::class,
+            CommentReplySeeder::class
         ]);
     }
 }

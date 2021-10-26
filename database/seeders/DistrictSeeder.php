@@ -121,5 +121,41 @@ class DistrictSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('districts')->insert([
+            'name' => 'Stari Grad',
+            'description' => 'A borough of Jajce',
+            'status' => 1,
+            'city_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('districts')->insert([
+            'name' => 'Vodopad',
+            'description' => 'A borough of Jajce',
+            'status' => 1,
+            'city_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('districts')->insert([
+            'name' => 'Kralja Tomislava',
+            'description' => 'A borough of Mostar',
+            'status' => 1,
+            'city_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('districts')->insert([
+            'name' => 'Stari Most',
+            'description' => 'A borough of Mostar',
+            'status' => 1,
+            'city_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
