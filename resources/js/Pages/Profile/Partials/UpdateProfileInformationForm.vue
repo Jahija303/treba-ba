@@ -20,7 +20,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                    <img :src="user.profile_photo_url" :alt="user.firstname" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -41,11 +41,32 @@
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- Name -->
+            <!-- FirstName -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
+                <jet-label for="firstname" value="First Name" />
+                <jet-input id="firstname" type="text" class="mt-1 block w-full" v-model="form.firstname" autocomplete="firstname" />
+                <jet-input-error :message="form.errors.firstname" class="mt-2" />
+            </div>
+
+            <!-- Last Name -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="lastname" value="Last Name" />
+                <jet-input id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname" autocomplete="lastname" />
+                <jet-input-error :message="form.errors.lastname" class="mt-2" />
+            </div>
+
+            <!-- Address -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="address" value="Address" />
+                <jet-input id="address" type="text" class="mt-1 block w-full" v-model="form.address" autocomplete="address" />
+                <jet-input-error :message="form.errors.address" class="mt-2" />
+            </div>
+
+            <!-- Username -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="username" value="Username" />
+                <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" autocomplete="username" />
+                <jet-input-error :message="form.errors.username" class="mt-2" />
             </div>
 
             <!-- Email -->
@@ -95,7 +116,10 @@
             return {
                 form: this.$inertia.form({
                     _method: 'PUT',
-                    name: this.user.name,
+                    firstname: this.user.firstname,
+                    lastname: this.user.lastname,
+                    address: this.user.address,
+                    username: this.user.username,
                     email: this.user.email,
                     photo: null,
                 }),

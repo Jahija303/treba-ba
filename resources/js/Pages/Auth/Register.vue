@@ -10,13 +10,33 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
+                <jet-label for="firstname" value="First name" />
+                <jet-input id="firstname" type="text" class="mt-1 block w-full" v-model="form.firstname" required autofocus autocomplete="firstname" />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="lastname" value="Last name" />
+                <jet-input id="lastname" type="text" class="mt-1 block w-full" v-model="form.lastname" required />
+            </div>
+
+            <!--<div class="mt-4">
+                <jet-label for="city" value="City" />
+
+            </div>-->
+
+            <div class="mt-4">
+                <jet-label for="address" value="Address" />
+                <jet-input id="address" type="text" class="mt-1 block w-full" v-model="form.address" required />
             </div>
 
             <div class="mt-4">
                 <jet-label for="email" value="Email" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+            </div>
+
+            <div class="mt-4">
+                <jet-label for="username" value="Username" />
+                <jet-input id="username" type="text" class="mt-1 block w-full" v-model="form.username" required />
             </div>
 
             <div class="mt-4">
@@ -63,6 +83,7 @@
     import JetCheckbox from '@/Jetstream/Checkbox.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+    import JetDropdown from '@/Jetstream/Dropdown.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
@@ -75,14 +96,19 @@
             JetCheckbox,
             JetLabel,
             JetValidationErrors,
+            JetDropdown,
             Link,
         },
 
         data() {
             return {
                 form: this.$inertia.form({
-                    name: '',
+                    firstname: '',
+                    lastname: '',
+                    city: 0,
+                    address: '',
                     email: '',
+                    username: '',
                     password: '',
                     password_confirmation: '',
                     terms: false,

@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'username' => 'admin',
-            'city_id' => 1
+            'city_id' => 1,
+            'status' => 1,
         ])->assignRole('super-admin');
 
         User::create([
@@ -26,7 +27,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'username' => 'user',
-            'city_id' => 1
+            'city_id' => 1,
+            'status' => 1,
         ])->assignRole('user');
 
         User::factory(10)->create()->each(function ($user) {
