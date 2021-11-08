@@ -1,10 +1,12 @@
 <template>
+    <Head :title="title" ></Head>
+
     <div class="wrapper">
 
         <!-- Preloader -->
-        <!--<div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div>-->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" :src="'/storage/images/AdminLTELogo.png'" alt="AdminLTELogo" height="60" width="60">
+        </div>
 
         <!-- Navbar -->
         <Navbar></Navbar>
@@ -46,12 +48,35 @@
     import Footer from "../Components/Footer"
     import Navbar from "../Components/Navbar"
     import Sidebar from "../Components/Sidebar"
+    import { Head } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
+        props: {
+            title: String,
+        },
+
         components: {
+            Head,
             Navbar,
             Footer,
             Sidebar,
         },
+        mounted() {
+            this.init()
+        },
+        methods: {
+            init() {
+                let SELECTOR_PRELOADER = ".loader"
+                setTimeout(() => {
+                    let $loader = $(SELECT_LOADER)
+                    if($loader) {
+                        $loader.css('height',0)
+                        setTimeout(() => {
+                            $loader.children().hide()
+                        }, 2000)
+                    }
+                }, 2000)
+            }
+        }
     })
 </script>

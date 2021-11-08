@@ -24,8 +24,3 @@ Route::prefix('admin')
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     }
 );
-
-//Route::middleware(['auth:sanctum', 'verified', 'role:super-admin'])
-//    ->get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-
-//Route::resource('cities', CityController::class);
