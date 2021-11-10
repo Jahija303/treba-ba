@@ -72,7 +72,7 @@
                     </li>
                     <li class="nav-header">MISCELLANEUS</li>
                     <li class="nav-item">
-                        <Link href="#" class="nav-link">
+                        <Link :href="route('home')" class="nav-link">
                             <i class="nav-icon fas fa-home"></i>
                             <p>
                                 Site
@@ -88,12 +88,12 @@
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" role="button">
+                        <Link id="customButton" :href="route('logout')" class="nav-link" as="button" method="post">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>
                                 Log Out
                             </p>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </nav>
@@ -119,3 +119,22 @@ export default defineComponent({
     },
 })
 </script>
+
+<style scoped>
+    #customButton {
+        background-color: transparent;
+        color: #c2c7d0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    #customButton:hover {
+        background-color: rgba(255,255,255,.1);
+        color: whitesmoke;
+    }
+
+    #customButton p {
+        padding-left: 4px;
+    }
+</style>

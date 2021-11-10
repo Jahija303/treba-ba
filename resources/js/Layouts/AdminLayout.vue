@@ -22,7 +22,7 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <slot name="header"></slot>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -66,14 +66,14 @@
         },
         methods: {
             init() {
-                let SELECTOR_PRELOADER = ".loader"
+                const SELECTOR_PRELOADER = ".preloader"
                 setTimeout(() => {
-                    let $loader = $(SELECT_LOADER)
+                    let $loader = $(SELECTOR_PRELOADER)
                     if($loader) {
                         $loader.css('height',0)
                         setTimeout(() => {
                             $loader.children().hide()
-                        }, 2000)
+                        }, 200)
                     }
                 }, 2000)
             }

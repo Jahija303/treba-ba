@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CityController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -16,11 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth:sanctum', 'verified', 'role:super-admin'])->group(function () {
+    ->middleware(['auth:sanctum', 'verified', 'role:super-admin'])
+    ->group(function () {
+
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
+        Route::prefix('roles')
+            ->name('roles.')
+            ->group(function() {
+
+                Route::get('/', [RoleController::class, 'index'])->name('index');
+        });
     }
 );
