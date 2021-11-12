@@ -135,7 +135,7 @@ import AdminLayout from "../../Layouts/AdminLayout";
 
 export default defineComponent({
     components: {
-        AdminLayout
+        AdminLayout,
     },
     mounted() {
         this.connectedSortable()

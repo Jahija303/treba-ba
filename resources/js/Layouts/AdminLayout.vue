@@ -39,7 +39,6 @@
         <!-- Footer -->
         <Footer />
         <!-- /.footer -->
-
     </div>
 </template>
 
@@ -54,7 +53,6 @@
         props: {
             title: String,
         },
-
         components: {
             Head,
             Navbar,
@@ -76,7 +74,7 @@
                         }, 200)
                     }
                 }, 2000)
-            }
+            },
         }
     })
 </script>

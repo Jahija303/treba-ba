@@ -39,10 +39,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <Link :href="route('admin.roles.index')" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Roles</p>
-                                </a>
+                                </Link>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
