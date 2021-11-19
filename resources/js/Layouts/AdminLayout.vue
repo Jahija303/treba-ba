@@ -65,15 +65,21 @@
         methods: {
             init() {
                 const SELECTOR_PRELOADER = ".preloader"
-                setTimeout(() => {
-                    let $loader = $(SELECTOR_PRELOADER)
-                    if($loader) {
-                        $loader.css('height',0)
-                        setTimeout(() => {
-                            $loader.children().hide()
-                        }, 200)
-                    }
-                }, 2000)
+                let $loader = $ (SELECTOR_PRELOADER)
+
+                if( sessionStorage.getItem('doNotShowPreloader') == null) {
+                    setTimeout(() => {
+                        if($loader) {
+                            $loader.css('height',0)
+                            setTimeout(() => {
+                                $loader.children().hide()
+                                sessionStorage.setItem('doNotShowPreloader', 'true')
+                            }, 200)
+                        }
+                    }, 1500)
+                } else {
+                    $loader.hide()
+                }
             },
         }
     })

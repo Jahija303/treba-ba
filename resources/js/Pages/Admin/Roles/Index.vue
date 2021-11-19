@@ -8,7 +8,7 @@
                             <h2>Roles</h2>
                         </div>
                         <div class="col text-right">
-                            <button type="button" class="btn btn-primary">
+                            <button @click="openCreateRoleModal" type="button" class="btn btn-primary">
                                 <i class="fas fa-folder-plus"></i>
                                 Add
                             </button>
@@ -31,13 +31,13 @@
                         <td>{{ role.name }}</td>
                         <td>{{ formatDate(role.created_at) }}</td>
                         <td>
-                            <a href="#">
+                            <a :href="route('admin.roles.edit', role.id)">
                                 <i class="fas fa-edit" style="color: #007bff"></i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmRoleDeletion" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt" @click="confirmRoleDeletion(role)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -45,10 +45,10 @@
                 </table>
             </div>
 
-            <!-- Delete Account Confirmation Modal -->
+            <!-- Delete Role Confirmation Modal -->
             <jet-dialog-modal :show="confirmingRoleDeletion" @close="closeModal">
                 <template #title>
-                    Delete Account
+                    Delete Role
                 </template>
 
                 <template #content>
@@ -60,9 +60,39 @@
                         Cancel
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click="deleteRole" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-danger-button class="ml-2" @click="deleteRole()" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                         Delete Role
                     </jet-danger-button>
+                </template>
+            </jet-dialog-modal>
+
+            <!-- Create Role Modal -->
+            <jet-dialog-modal :show="createRoleModal" @close="closeModal">
+                <template #title>
+                    Create Role
+                </template>
+
+                <template #content>
+                    Please enter the name of the role you'd like to create.
+
+                    <div class="mt-4">
+                        <jet-input type="text" class="mt-1 block w-3/4" placeholder="Name"
+                                   ref="name"
+                                   v-model="form.name"
+                                   @keyup.enter="createRole" />
+
+                        <jet-input-error :message="form.errors.name" class="mt-2" />
+                    </div>
+                </template>
+
+                <template #footer>
+                    <jet-button @click="closeModal">
+                        Cancel
+                    </jet-button>
+
+                    <jet-secondary-button class="ml-2" @click="createRole" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Create role
+                    </jet-secondary-button>
                 </template>
             </jet-dialog-modal>
         </template>
@@ -76,6 +106,10 @@
     import JetDialogModal from '@/Jetstream/DialogModal.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+    import JetButton from '@/Jetstream/Button.vue'
+    import JetInput from '@/Jetstream/Input.vue'
+    import JetInputError from '@/Jetstream/InputError.vue'
+    import Swal from "sweetalert2";
 
     export default defineComponent({
         components: {
@@ -83,15 +117,18 @@
             JetDangerButton,
             JetDialogModal,
             JetSecondaryButton,
+            JetInputError,
+            JetButton,
+            JetInput,
         },
         data() {
             return {
                 confirmingRoleDeletion: false,
+                createRoleModal: false,
 
                 form: this.$inertia.form({
                     id: '',
                     name: '',
-                    permissions: []
                 })
             }
         },
@@ -100,14 +137,54 @@
             formatDate : function (date) {
                 return moment(date, 'YYYY-MM-DD').format('DD-MM-YYYY');
             },
-            confirmRoleDeletion() {
+            confirmRoleDeletion(role) {
                 this.confirmingRoleDeletion = true;
+                this.form.id = role.id
+            },
+            openCreateRoleModal() {
+                this.createRoleModal = true
+                setTimeout(() => this.$refs.name.focus(), 250)
             },
             deleteRole() {
-                console.log("Deleting role")
+                this.form.delete(this.route('admin.roles.destroy', this.form.id), {
+                    onSuccess: ()=> {
+                        this.closeModal()
+                        Swal.fire({
+                            position: 'top-end',
+                            toast: 'true',
+                            icon: 'success',
+                            title: 'Role has been deleted.',
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
+                    },
+                    onFinish: () => this.form.reset(),
+                })
+            },
+            createRole() {
+                this.form.post(this.route('admin.roles.store'), {
+                    preserveScroll: true,
+                    onSuccess:() => {
+                        this.closeModal()
+                        Swal.fire({
+                            position: 'top-end',
+                            toast: 'true',
+                            icon: 'success',
+                            title: 'New role created',
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
+                    },
+                    onError: () => this.$refs.name.focus(),
+                    onFinish: () => this.form.reset(),
+                })
             },
             closeModal() {
                 this.confirmingRoleDeletion = false
+                this.createRoleModal = false
+                this.form.clearErrors()
+                this.editMode = false
+                this.form.reset()
             },
         },
     })
