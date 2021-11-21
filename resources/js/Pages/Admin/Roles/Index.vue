@@ -1,28 +1,30 @@
 <template>
     <admin-layout title="Roles">
-        <template #mainContent>
-            <div class="content-wrapper ml-3 mr-3 mt-0">
-                <div id="container" class="container mr-5 mb-6">
-                    <div class="row w-100">
-                        <div class="col">
-                            <h2>Roles</h2>
-                        </div>
-                        <div class="col text-right">
-                            <button @click="openCreateRoleModal" type="button" class="btn btn-primary">
-                                <i class="fas fa-folder-plus"></i>
-                                Add
-                            </button>
-                        </div>
+        <template #header>
+            <div id="container" class="container mr-5">
+                <div class="row w-100">
+                    <div class="col">
+                        <h1 class="m-0">Roles</h1>
+                    </div>
+                    <div class="col text-right">
+                        <button @click="openCreateRoleModal" type="button" class="btn btn-primary">
+                            <i class="fas fa-folder-plus"></i>
+                            Add
+                        </button>
                     </div>
                 </div>
-                <table class="table table-hover text-nowrap">
-                    <thead>
+            </div>
+        </template>
+        <template #mainContent>
+            <div class="content-wrapper ml-3 mr-3 mt-0">
+                <table class="table table-hover table-bordered">
+                    <thead id="table-head">
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Created</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,9 +33,9 @@
                         <td>{{ role.name }}</td>
                         <td>{{ formatDate(role.created_at) }}</td>
                         <td>
-                            <a :href="route('admin.roles.edit', role.id)">
+                            <Link :href="route('admin.roles.edit', role.id)">
                                 <i class="fas fa-edit" style="color: #007bff"></i>
-                            </a>
+                            </Link>
                         </td>
                         <td>
                             <a href="#">
@@ -102,6 +104,7 @@
 <script>
     import { defineComponent } from 'vue'
     import AdminLayout from "../../../Layouts/AdminLayout";
+    import { Link } from '@inertiajs/inertia-vue3'
     import moment from "moment";
     import JetDialogModal from '@/Jetstream/DialogModal.vue'
     import JetDangerButton from '@/Jetstream/DangerButton.vue'
@@ -113,6 +116,7 @@
 
     export default defineComponent({
         components: {
+            Link,
             AdminLayout,
             JetDangerButton,
             JetDialogModal,
@@ -158,6 +162,17 @@
                             timer: 2500
                         })
                     },
+                    onError: () => {
+                        this.closeModal()
+                        Swal.fire({
+                            position: 'top-end',
+                            toast: 'true',
+                            icon: 'error',
+                            title: 'Error deleting role',
+                            showConfirmButton: false,
+                            timer: 2500
+                        })
+                    },
                     onFinish: () => this.form.reset(),
                 })
             },
@@ -194,5 +209,9 @@
 <style scoped>
 #container {
     max-width: 100% !important;
+}
+#table-head {
+    background-color: #007bff;
+    color: white;
 }
 </style>

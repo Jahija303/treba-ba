@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
+use \Spatie\Permission\Models\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -27,7 +27,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      */
     public function store(Request $request)
     {
@@ -45,35 +45,48 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Role  $role
+     * @param $roleId
      * @return Response
      */
     public function edit($roleId): Response
     {
         $role = Role::find($roleId);
-        $permissions = Permission::all();
+
         return Inertia::render('Admin/Roles/Edit', [
             'role' => $role,
-            'permissions' => $permissions
+            'permissions' => Permission::all()->pluck('name'),
+            'rolePermissions' => $role->permissions()->pluck('name')
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $roleId)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'permissions' => 'required',
+        ]);
+
+        $role = Role::find($roleId);
+        $role->update($request->only(['name']));
+
+        $permissions = collect($request->input('permissions'));
+        $role->syncPermissions($permissions);
+
+        return Inertia::render('Admin/Roles/Index', [
+            'roles' => Role::all(),
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  $role
+     * @param $roleId
      * @return RedirectResponse
      */
     public function destroy($roleId): RedirectResponse

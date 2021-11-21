@@ -7,7 +7,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    emits: ['update:checked'],
+    emits: ['update:checked', 'update:unchecked'],
 
     props: {
         checked: {
@@ -26,7 +26,11 @@ export default defineComponent({
             },
 
             set(val) {
-                this.$emit("update:checked", val);
+                if(val) {
+                    this.$emit("update:checked", val);
+                } else if(!val) {
+                    this.$emit("update:unchecked", val);
+                }
             },
         },
     },
