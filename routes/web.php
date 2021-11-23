@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,7 @@ Route::prefix('admin')
                 Route::delete('/destroy/{id}', [PermissionController::class, 'destroy'])->name('destroy');
             });
 
+        // Cities
         Route::prefix('cities')
             ->name('cities.')
             ->group(function() {
@@ -58,6 +60,17 @@ Route::prefix('admin')
                 Route::get('/edit/{id}', [CityController::class, 'edit'])->name('edit');
                 Route::put('/update/{id}', [CityController::class, 'update'])->name('update');
                 Route::delete('/destroy/{id}', [CityController::class, 'destroy'])->name('destroy');
+            });
+
+        // Districts
+        Route::prefix('districts')
+            ->name('districts.')
+            ->group(function() {
+                Route::get('/', [DistrictController::class, 'index'])->name('index');
+                Route::post('/store', [DistrictController::class, 'store'])->name('store');
+                Route::get('/edit/{id}', [DistrictController::class, 'edit'])->name('edit');
+                Route::put('/update/{id}', [DistrictController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [DistrictController::class, 'destroy'])->name('destroy');
             });
     }
 );

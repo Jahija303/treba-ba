@@ -51,7 +51,7 @@
             </div>
 
             <!-- Delete Permission Confirmation Modal -->
-            <jet-dialog-modal id="delete-modal" :show="confirmingPermissionDeletion" @close="closeModal">
+            <jet-dialog-modal :show="confirmingPermissionDeletion" @close="closeModal">
                 <template #title>
                     Delete Permission
                 </template>

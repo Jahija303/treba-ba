@@ -56,10 +56,10 @@
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <Link :href="route('admin.districts.index')" class="nav-link">
                             <i class="fas fa-road nav-icon"></i>
                             <p>Districts</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-header">MISCELLANEUS</li>
                     <li class="nav-item">

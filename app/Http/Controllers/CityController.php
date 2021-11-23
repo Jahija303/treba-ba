@@ -36,56 +36,54 @@ class CityController extends Controller
         $request->validate([
             'name' => 'required|unique:cities',
             'description' => 'required|unique:cities',
-            'status' => 'required',
             'population' => 'required',
         ]);
 
-        City::create($request->all());
+        City::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'status' => 1,
+            'population' => $request->population
+        ]);
         return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function show(City $city)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(City $city)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'population' => 'required',
+        ]);
+
+        $city = City::find($id);
+        $city->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'status' => 1,
+            'population' => $request->population
+        ]);
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy(City $city)
+    public function destroy($id): RedirectResponse
     {
-        //
+        $city = City::find($id);
+        $city->delete();
+        return back();
     }
 }

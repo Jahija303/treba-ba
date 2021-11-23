@@ -1,13 +1,13 @@
 <template>
-    <admin-layout title="Cities">
+    <admin-layout title="Districts">
         <template #header>
             <div id="container" class="container mr-5">
                 <div class="row w-100">
                     <div class="col">
-                        <h1 class="m-0">Cities</h1>
+                        <h1 class="m-0">Districts</h1>
                     </div>
                     <div class="col text-right">
-                        <button @click="openCreateCityModal" type="button" class="btn btn-primary">
+                        <button @click="openCreateDistrictModal" type="button" class="btn btn-primary">
                             <i class="fas fa-folder-plus"></i>
                             Add
                         </button>
@@ -23,48 +23,48 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Population</th>
                         <th scope="col">Status</th>
+                        <th scope="col">City</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="city in cities.data">
-                        <td>{{ city.id }}</td>
-                        <td>{{ city.name }}</td>
-                        <td>{{ city.description }}</td>
-                        <td>{{ city.population }}</td>
-                            <td v-if="city.status === 1"><span class="badge badge-success">active</span></td>
-                            <td v-else-if="city.status === 0"><span class="badge badge-danger">inactive</span></td>
+                    <tr v-for="district in districts.data">
+                        <td>{{ district.id }}</td>
+                        <td>{{ district.name }}</td>
+                        <td>{{ district.description }}</td>
+                        <td v-if="district.status === 1"><span class="badge badge-success">active</span></td>
+                        <td v-else-if="district.status === 0"><span class="badge badge-danger">inactive</span></td>
+                        <td>{{ getCityName(district.city_id) }}</td>
                         <td>
                             <a href="#">
-                                <i class="fas fa-edit" @click="openEditCityModal(city)" style="color: #007bff"></i>
+                                <i class="fas fa-edit" @click="openEditDistrictModal(district)" style="color: #007bff"></i>
                             </a>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmDeleteCity(city)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt" @click="confirmDeleteDistrict(district)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
 
-                <pagination class="mt-6 pb-4" :links="cities.links" />
+                <pagination class="mt-6 pb-4" :links="districts.links" />
             </div>
 
-            <!-- Create City Modal -->
-            <jet-dialog-modal :show="createCityModal" @close="closeModal">
+            <!-- Create District Modal -->
+            <jet-dialog-modal :show="createDistrictModal" @close="closeModal">
                 <template #title>
-                    Create City
+                    Create District
                 </template>
 
                 <template #content>
                     Please enter the data in all of the required fields.
 
                     <div class="mt-4">
-                        <jet-label>City name*</jet-label>
+                        <jet-label>District name*</jet-label>
                         <jet-input type="text" class="mt-1 block w-3/4" placeholder="Name"
                                    ref="name"
                                    v-model="form.name"/>
@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <jet-label>A short description of the city, something it is known for*</jet-label>
+                        <jet-label>A short description of the district, something it is known for*</jet-label>
                         <jet-input type="text" class="mt-1 block w-3/4" placeholder="Description"
                                    ref="description"
                                    v-model="form.description"/>
@@ -82,13 +82,15 @@
                     </div>
 
                     <div class="mt-4">
-                        <jet-label>Population*</jet-label>
-                        <jet-input type="number" class="mt-1 block w-3/4" placeholder="012345"
-                                   ref="population"
-                                   v-model.number="form.population"
-                                   @keypress="isNumber($event)"/>
+                        <jet-label>It is located in*</jet-label>
+                        <select class="mt-1 block w-3/4 border-gray-300
+                                    focus:border-indigo-300 focus:ring focus:ring-indigo-200
+                                    focus:ring-opacity-50 rounded-md shadow-sm"
+                                @change="selectedCity($event)">
+                            <option v-for="city in citiesList" :value="city.id">{{city.name}}</option>
+                        </select>
 
-                        <jet-input-error :message="form.errors.population" class="mt-2" />
+                        <jet-input-error :message="form.errors.city_id" class="mt-2" />
                     </div>
                 </template>
 
@@ -97,21 +99,21 @@
                         Cancel
                     </jet-button>
 
-                    <jet-secondary-button class="ml-2" @click="createCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Create city
+                    <jet-secondary-button class="ml-2" @click="createDistrict" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Create District
                     </jet-secondary-button>
                 </template>
             </jet-dialog-modal>
 
-            <!-- Delete City Confirmation Modal -->
-            <jet-dialog-modal :show="confirmCityDeletion" @close="closeModal">
+            <!-- Delete District Confirmation Modal -->
+            <jet-dialog-modal :show="confirmDistrictDeletion" @close="closeModal">
                 <template #title>
-                    Delete City
+                    Delete District
                 </template>
 
                 <template #content>
-                    Are you sure you want to delete this city? Once this city is deleted, all of its resources and data will be permanently deleted.
-                    Please confirm you would like to permanently delete this city.
+                    Are you sure you want to delete this district? Once this district is deleted, all of its resources and data will be permanently deleted.
+                    Please confirm you would like to permanently delete this district.
                 </template>
 
                 <template #footer>
@@ -119,21 +121,21 @@
                         Cancel
                     </jet-secondary-button>
 
-                    <jet-danger-button class="ml-2" @click="deleteCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Delete City
+                    <jet-danger-button class="ml-2" @click="deleteDistrict" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Delete District
                     </jet-danger-button>
                 </template>
             </jet-dialog-modal>
 
-            <!-- Edit City Modal -->
-            <jet-dialog-modal :show="editCityModal" @close="closeModal">
+            <!-- Edit District Modal -->
+            <jet-dialog-modal :show="editDistrictModal" @close="closeModal">
                 <template #title>
-                    Edit City
+                    Edit District
                 </template>
 
                 <template #content>
                     <div class="mt-4">
-                        <jet-label>City Name</jet-label>
+                        <jet-label>District Name</jet-label>
                         <jet-input type="text" class="mt-1 block w-3/4"
                                    ref="name"
                                    v-model="form.name"/>
@@ -151,13 +153,19 @@
                     </div>
 
                     <div class="mt-4">
-                        <jet-label>Population</jet-label>
-                        <jet-input type="number" class="mt-1 block w-3/4"
-                                   ref="population"
-                                   v-model.number="form.population"
-                                   @keypress="isNumber($event)"/>
+                        <jet-label>It is located in*</jet-label>
+                        <select class="mt-1 block w-3/4 border-gray-300
+                                    focus:border-indigo-300 focus:ring focus:ring-indigo-200
+                                    focus:ring-opacity-50 rounded-md shadow-sm"
+                                @change="selectedCity($event)">
+                            <option v-for="city in citiesList"
+                                    :value="city.id"
+                                    :selected="city.id === this.form.city_id">
+                                {{city.name}}
+                            </option>
+                        </select>
 
-                        <jet-input-error :message="form.errors.population" class="mt-2" />
+                        <jet-input-error :message="form.errors.city_id" class="mt-2" />
                     </div>
                 </template>
 
@@ -166,8 +174,8 @@
                         Cancel
                     </jet-button>
 
-                    <jet-secondary-button class="ml-2" @click="updateCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Update City
+                    <jet-secondary-button class="ml-2" @click="updateDistrict" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Update District
                     </jet-secondary-button>
                 </template>
             </jet-dialog-modal>
@@ -208,23 +216,33 @@ export default defineComponent({
     },
     data() {
         return {
-            createCityModal: false,
-            confirmCityDeletion: false,
-            editCityModal: false,
+            createDistrictModal: false,
+            confirmDistrictDeletion: false,
+            editDistrictModal: false,
 
             form: this.$inertia.form({
                 id: '',
                 name: '',
                 description: '',
                 status: '',
-                population: '',
+                city_id: 1,
             }),
+
+            citiesList: this.cities,
         }
     },
-    props: ['cities'],
+    props: ['districts', 'cities'],
     methods: {
         formatDate : function (date) {
             return moment(date, 'YYYY-MM-DD').format('DD-MM-YYYY');
+        },
+        getCityName(cityId) {
+            return this.citiesList.filter(function (city) {
+                if(city.id === cityId) return city
+            })
+        },
+        selectedCity(e) {
+            this.form.city_id = e.target.value
         },
         isNumber : function (evt) {
             const keysAllowed = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -233,24 +251,24 @@ export default defineComponent({
                 evt.preventDefault()
             }
         },
-        openCreateCityModal() {
-            this.createCityModal = true
+        openCreateDistrictModal() {
+            this.createDistrictModal = true
             setTimeout(() => this.$refs.name.focus(), 250)
         },
-        confirmDeleteCity(city) {
-            this.form.id = city.id
-            this.confirmCityDeletion = true
+        confirmDeleteDistrict(district) {
+            this.form.id = district.id
+            this.confirmDistrictDeletion = true
         },
-        openEditCityModal(city) {
-            this.editCityModal = true
-            this.form.id = city.id
-            this.form.name = city.name
-            this.form.description = city.description
-            this.form.population = city.population
+        openEditDistrictModal(district) {
+            this.form.id = district.id
+            this.form.name = district.name
+            this.form.description = district.description
+            this.form.city_id = district.city_id
+            this.editDistrictModal = true
             setTimeout(() => this.$refs.name.focus(), 250)
         },
-        createCity() {
-            this.form.post(this.route('admin.cities.store'), {
+        createDistrict() {
+            this.form.post(this.route('admin.districts.store'), {
                 preserveScroll: true,
                 onSuccess:() => {
                     this.closeModal()
@@ -258,7 +276,7 @@ export default defineComponent({
                         position: 'top-end',
                         toast: 'true',
                         icon: 'success',
-                        title: 'New city created',
+                        title: 'New district created',
                         showConfirmButton: false,
                         timer: 2500
                     })
@@ -267,8 +285,8 @@ export default defineComponent({
                 onFinish: () => this.form.reset(),
             })
         },
-        deleteCity() {
-            this.form.delete(this.route('admin.cities.destroy', this.form.id), {
+        deleteDistrict() {
+            this.form.delete(this.route('admin.districts.destroy', this.form.id), {
                 preserveScroll: true,
                 onSuccess: ()=> {
                     this.closeModal()
@@ -276,7 +294,7 @@ export default defineComponent({
                         position: 'top-end',
                         toast: 'true',
                         icon: 'success',
-                        title: 'The city has been deleted.',
+                        title: 'The district has been deleted.',
                         showConfirmButton: false,
                         timer: 2500
                     })
@@ -287,7 +305,7 @@ export default defineComponent({
                         position: 'top-end',
                         toast: 'true',
                         icon: 'error',
-                        title: 'Error deleting city',
+                        title: 'Error deleting the district',
                         showConfirmButton: false,
                         timer: 2500
                     })
@@ -295,8 +313,8 @@ export default defineComponent({
                 onFinish: () => this.form.reset(),
             })
         },
-        updateCity() {
-            this.form.put(this.route('admin.cities.update', this.form.id, this.form), {
+        updateDistrict() {
+            this.form.put(this.route('admin.districts.update', this.form.id, this.form), {
                 preserveScroll: true,
                 onSuccess: ()=> {
                     this.closeModal()
@@ -304,7 +322,7 @@ export default defineComponent({
                         position: 'top-end',
                         toast: 'true',
                         icon: 'success',
-                        title: 'City updated.',
+                        title: 'District updated.',
                         showConfirmButton: false,
                         timer: 2500
                     })
@@ -314,7 +332,7 @@ export default defineComponent({
                         position: 'top-end',
                         toast: 'true',
                         icon: 'error',
-                        title: 'Error updating city',
+                        title: 'Error updating district',
                         showConfirmButton: false,
                         timer: 2500
                     })
@@ -323,9 +341,9 @@ export default defineComponent({
             })
         },
         closeModal() {
-            this.createCityModal = false
-            this.confirmCityDeletion = false
-            this.editCityModal = false,
+            this.createDistrictModal = false
+            this.confirmDistrictDeletion = false
+            this.editDistrictModal = false,
             this.form.clearErrors()
             this.editMode = false
             this.form.reset()
