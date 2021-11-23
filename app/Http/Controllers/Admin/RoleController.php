@@ -86,12 +86,12 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $roleId
+     * @param $id
      * @return RedirectResponse
      */
-    public function destroy($roleId): RedirectResponse
+    public function destroy($id): RedirectResponse
     {
-        $role = Role::find($roleId);
+        $role = Role::find($id);
         $role->delete();
         return back();
     }

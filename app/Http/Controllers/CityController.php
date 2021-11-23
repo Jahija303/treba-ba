@@ -3,39 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
-        //
-    }
+        $cities = City::paginate(15);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Inertia::render('Admin/Cities/Index', [
+            'cities' => $cities
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:cities',
+            'description' => 'required|unique:cities',
+            'status' => 'required',
+            'population' => 'required',
+        ]);
+
+        City::create($request->all());
+        return back();
     }
 
     /**
@@ -63,7 +69,7 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */

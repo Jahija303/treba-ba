@@ -38,10 +38,10 @@
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <Link :href="route('admin.permissions.index')" class="nav-link">
                             <i class="fas fa-clipboard-check nav-icon"></i>
                             <p>Permissions</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -50,10 +50,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <Link :href="route('admin.cities.index')" class="nav-link">
                             <i class="fas fa-building nav-icon"></i>
                             <p>Cities</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
