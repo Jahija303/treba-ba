@@ -50,6 +50,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <Link :href="route('admin.categories.index')" class="nav-link">
+                            <i class="fas fa-clipboard-list nav-icon"></i>
+                            <p>Categories</p>
+                        </Link>
+                    </li>
+                    <li class="nav-item">
                         <Link :href="route('admin.cities.index')" class="nav-link">
                             <i class="fas fa-building nav-icon"></i>
                             <p>Cities</p>

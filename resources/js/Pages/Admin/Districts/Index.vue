@@ -237,9 +237,13 @@ export default defineComponent({
             return moment(date, 'YYYY-MM-DD').format('DD-MM-YYYY');
         },
         getCityName(cityId) {
-            return this.citiesList.filter(function (city) {
-                if(city.id === cityId) return city
+            let name
+            this.citiesList.forEach(element => {
+                if(element.id === cityId) {
+                    name = element.name
+                }
             })
+            return name
         },
         selectedCity(e) {
             this.form.city_id = e.target.value

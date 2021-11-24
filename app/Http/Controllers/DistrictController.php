@@ -22,7 +22,7 @@ class DistrictController extends Controller
 
         return Inertia::render('Admin/Districts/Index', [
             'districts' => $districts,
-            'cities' => City::all()
+            'cities' => City::all()->toArray()
         ]);
     }
 
