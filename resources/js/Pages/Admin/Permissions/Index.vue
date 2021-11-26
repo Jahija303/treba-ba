@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="permission in permissions.data" :key="permission.id">
-                        <td>{{ permission.id }}</td>
+                        <td class="font-weight-bold">{{ permission.id }}</td>
                         <td>{{ permission.name }}</td>
                         <td>{{ formatDate(permission.created_at) }}</td>
                         <td>

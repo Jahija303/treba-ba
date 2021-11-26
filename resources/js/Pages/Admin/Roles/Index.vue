@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="role in roles">
-                        <td>{{ role.id }}</td>
+                        <td class="font-weight-bold">{{ role.id }}</td>
                         <td>{{ role.name }}</td>
                         <td>{{ formatDate(role.created_at) }}</td>
                         <td>

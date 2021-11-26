@@ -31,7 +31,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="district in districts.data">
-                        <td>{{ district.id }}</td>
+                        <td class="font-weight-bold">{{ district.id }}</td>
                         <td>{{ district.name }}</td>
                         <td>{{ district.description }}</td>
                         <td v-if="district.status === 1"><span class="badge badge-success">active</span></td>
@@ -83,7 +83,7 @@
 
                     <div class="mt-4">
                         <jet-label>It is located in*</jet-label>
-                        <select class="mt-1 block w-3/4 border-gray-300
+                        <select id="citySelect" class="mt-1 block w-3/4 border-gray-300
                                     focus:border-indigo-300 focus:ring focus:ring-indigo-200
                                     focus:ring-opacity-50 rounded-md shadow-sm"
                                 @change="selectedCity($event)">
@@ -154,7 +154,7 @@
 
                     <div class="mt-4">
                         <jet-label>It is located in*</jet-label>
-                        <select class="mt-1 block w-3/4 border-gray-300
+                        <select id="citySelectEdit" class="mt-1 block w-3/4 border-gray-300
                                     focus:border-indigo-300 focus:ring focus:ring-indigo-200
                                     focus:ring-opacity-50 rounded-md shadow-sm"
                                 @change="selectedCity($event)">
@@ -236,6 +236,13 @@ export default defineComponent({
         formatDate : function (date) {
             return moment(date, 'YYYY-MM-DD').format('DD-MM-YYYY');
         },
+        setFormDefaults() {
+            this.form.city_id = 1
+        },
+        selectElement(id, valueToSelect) {
+            let element = document.getElementById(id);
+            element.value = valueToSelect;
+        },
         getCityName(cityId) {
             let name
             this.citiesList.forEach(element => {
@@ -286,7 +293,11 @@ export default defineComponent({
                     })
                 },
                 onError: () => this.$refs.name.focus(),
-                onFinish: () => this.form.reset(),
+                onFinish: () => {
+                    this.form.reset()
+                    this.setFormDefaults()
+                    this.selectElement('citySelect', '1')
+                }
             })
         },
         deleteDistrict() {
@@ -314,7 +325,10 @@ export default defineComponent({
                         timer: 2500
                     })
                 },
-                onFinish: () => this.form.reset(),
+                onFinish: () => {
+                    this.form.reset()
+                    this.setFormDefaults()
+                }
             })
         },
         updateDistrict() {
@@ -341,16 +355,22 @@ export default defineComponent({
                         timer: 2500
                     })
                 },
-                onFinish: () => this.form.reset(),
+                onFinish: () => {
+                    let cityVal = this.form.city_id
+                    this.form.reset()
+                    this.city_id = cityVal
+                    this.selectElement('citySelectEdit', cityVal)
+                },
             })
         },
         closeModal() {
             this.createDistrictModal = false
             this.confirmDistrictDeletion = false
-            this.editDistrictModal = false,
+            this.editDistrictModal = false
             this.form.clearErrors()
             this.editMode = false
             this.form.reset()
+            this.setFormDefaults()
         },
     },
 })

@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="category in categories.data" :key="category.id">
-                        <td>{{ category.id }}</td>
+                        <td class="font-weight-bold">{{ category.id }}</td>
                         <td>{{ category.name }}</td>
                         <td>{{ category.description }}</td>
                         <td>

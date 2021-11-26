@@ -26,10 +26,10 @@
                     </li>
                     <li class="nav-header">TABLES</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-user-friends nav-icon"></i>
+                        <Link :href="route('admin.users.index')" class="nav-link">
+                            <i class="fas fa-user-tag nav-icon"></i>
                             <p>Users</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
                         <Link :href="route('admin.roles.index')" class="nav-link">

@@ -64,7 +64,12 @@ class CityController extends Controller
         ]);
 
         $city = City::find($id);
-        $city->update($request->all());
+        $city->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'status' => 1,
+            'population' => $request->population
+        ]);
 
         return back();
     }

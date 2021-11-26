@@ -31,7 +31,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="city in cities.data">
-                        <td>{{ city.id }}</td>
+                        <td class="font-weight-bold">{{ city.id }}</td>
                         <td>{{ city.name }}</td>
                         <td>{{ city.description }}</td>
                         <td>{{ city.population }}</td>

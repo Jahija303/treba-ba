@@ -1,7 +1,8 @@
 <template>
     <teleport to="body">
         <transition leave-active-class="duration-200">
-            <div id="custom-modal" v-show="show" class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0" scroll-region>
+            <div id="custom-modal" v-show="show" class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0"
+                 :style="[marginTop ? {'margin-top': '5rem'} : {'margin-top': '0.1rem'}]" scroll-region>
                 <transition enter-active-class="ease-out duration-300"
                         enter-from-class="opacity-0"
                         enter-to-class="opacity-100"
@@ -44,6 +45,9 @@ export default defineComponent({
             closeable: {
                 default: true
             },
+            marginTop: {
+                default: true
+            }
         },
 
         watch: {
@@ -93,13 +97,12 @@ export default defineComponent({
                     '2xl': 'sm:max-w-2xl',
                 }[this.maxWidth]
             }
-        }
-    })
+        },
+})
 </script>
 
 <style scoped>
 #custom-modal {
     z-index: 1050;
-    margin-top: 5rem;
 }
 </style>
