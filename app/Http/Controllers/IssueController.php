@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Issue;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class IssueController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        $issues = Issue::paginate(15);
+        foreach ($issues as $issue) {
+            $issue->city_name = $issue->city->name;
+            $issue->district_name = $issue->district->name;
+            $issue->category_name = $issue->category->name;
+            $issue->user_username = $issue->user->username;
+        }
+
+        return Inertia::render('Admin/Issues/Index', [
+            'issues' => $issues,
+        ]);
     }
 
     /**

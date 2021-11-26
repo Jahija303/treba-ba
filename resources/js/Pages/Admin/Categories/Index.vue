@@ -18,7 +18,7 @@
         <template #mainContent>
 
             <div class="content-wrapper ml-3 mr-3 mt-0">
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover">
                     <thead id="table-head">
                     <tr>
                         <th scope="col">ID</th>

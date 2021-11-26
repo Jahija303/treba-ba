@@ -44,10 +44,10 @@
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <Link :href="route('admin.issues.index')" class="nav-link">
                             <i class="fas fa-bomb nav-icon"></i>
                             <p>Issues</p>
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
                         <Link :href="route('admin.categories.index')" class="nav-link">
