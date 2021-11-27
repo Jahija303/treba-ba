@@ -24,8 +24,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,14 +32,12 @@
                         <td class="font-weight-bold">{{ category.id }}</td>
                         <td>{{ category.name }}</td>
                         <td>{{ category.description }}</td>
-                        <td>
-                            <a href="#">
-                                <i class="fas fa-edit" @click="openEditCategoryModal(category)" style="color: #007bff"></i>
+                        <td class="max-w-0xl">
+                            <a class="mr-4" href="#">
+                                <i class="fas fa-edit fa-lg" @click="openEditCategoryModal(category)" style="color: #007bff"></i>
                             </a>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmCategoryDeletion(category)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmCategoryDeletion(category)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -282,7 +279,11 @@ export default defineComponent({
                         timer: 2500
                     })
                 },
-                onFinish: () => this.form.reset(),
+                onFinish: () => {
+                    if(!this.editCategoryModal) {
+                        this.form.reset()
+                    }
+                }
             })
         },
         closeModal() {

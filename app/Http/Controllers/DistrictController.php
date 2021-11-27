@@ -64,7 +64,7 @@ class DistrictController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:districts',
             'description' => 'required',
             'city_id' => 'required'
         ]);

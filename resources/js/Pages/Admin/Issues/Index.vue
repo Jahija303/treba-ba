@@ -31,7 +31,7 @@
                         <th>Reported by</th>
                         <th>Status</th>
                         <th>Update</th>
-                        <th>Delete</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,18 +41,18 @@
                         <td>{{ issue.city_name }}</td>
                         <td>{{ issue.district_name }}</td>
                         <td>{{ issue.category_name }}</td>
-                            <td v-if="issue.priority === 1"><span class="badge badge-info">Moderate</span></td>
-                            <td v-if="issue.priority === 2"><span class="badge badge-warning">Considerable</span></td>
-                            <td v-if="issue.priority === 3"><span class="badge badge-danger">High</span></td>
+                            <td v-if="issue.priority === 1"><h5><span class="badge badge-info">Moderate</span></h5></td>
+                            <td v-if="issue.priority === 2"><h5><span class="badge badge-warning">Considerable</span></h5></td>
+                            <td v-if="issue.priority === 3"><h5><span class="badge badge-danger">High</span></h5></td>
                         <td>{{ issue.user_username }}</td>
-                            <td v-if="issue.status === 1"><span class="badge badge-success">active</span></td>
-                            <td v-else-if="issue.status === 0"><span class="badge badge-danger">inactive</span></td>
+                            <td v-if="issue.status === 1"><h5><span class="badge badge-success">active</span></h5></td>
+                            <td v-else-if="issue.status === 0"><h5><span class="badge badge-danger">inactive</span></h5></td>
                         <td>
                             <toggle-button @switched="statusUpdated" :id="issue.id" :defaultState="issue.status"/>
                         </td>
                         <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmDeleteIssue(issue)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmDeleteIssue(issue)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>

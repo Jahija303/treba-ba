@@ -23,8 +23,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Created</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,14 +31,12 @@
                         <td class="font-weight-bold">{{ role.id }}</td>
                         <td>{{ role.name }}</td>
                         <td>{{ formatDate(role.created_at) }}</td>
-                        <td>
-                            <Link :href="route('admin.roles.edit', role.id)">
-                                <i class="fas fa-edit" style="color: #007bff"></i>
+                        <td class="max-w-0xl">
+                            <Link class="mr-4" :href="route('admin.roles.edit', role.id)">
+                                <i class="fas fa-edit fa-lg" style="color: #007bff"></i>
                             </Link>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmRoleDeletion(role)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmRoleDeletion(role)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -150,6 +147,7 @@
                 setTimeout(() => this.$refs.name.focus(), 250)
             },
             deleteRole() {
+                console.log(this.form.id)
                 this.form.delete(this.route('admin.roles.destroy', this.form.id), {
                     onSuccess: ()=> {
                         this.closeModal()

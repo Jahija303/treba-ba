@@ -9,20 +9,12 @@
                 <div class="card card-primary">
                     <!-- header start -->
                     <div class="card-header">
-                        <h3 class="card-title">Edit Role Permissions & Name</h3>
+                        <h3 class="card-title">Edit Role Permissions : <span class="font-weight-bold">{{ role.name }}</span></h3>
                     </div>
                     <!-- /.header-end -->
 
                     <!-- form start -->
                     <div class="card-body">
-                        <div class="form-group">
-                            <jet-label for="roleName" value="Role Name" />
-                            <jet-input id="roleName" type="text"
-                                       class="mt-1 block w-full"
-                                       ref="roleName"
-                                       v-model="form.name"/>
-                            <jet-input-error :message="form.errors.name" class="mt-2" />
-                        </div>
                         <jet-label value="Permissions" />
                         <jet-input-error :message="form.errors.permissions" class="mt-2" />
                         <div class="container">
@@ -75,7 +67,6 @@ export default defineComponent({
     data() {
         return {
             form: this.$inertia.form({
-                name: this.role.name,
                 permissions: this.rolePermissions,
             })
         }

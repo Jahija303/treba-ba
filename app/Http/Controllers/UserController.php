@@ -80,9 +80,13 @@ class UserController extends Controller
     {
         $request->validate([
             'role' => 'required',
+            'status' => 'required'
         ]);
 
         $user = User::find($id);
+        $user->update([
+           'status' => $request->status
+        ]);
         $user->syncRoles([$request->role]);
         return back();
     }

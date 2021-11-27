@@ -58,7 +58,7 @@ class CityController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:cities',
             'description' => 'required',
             'population' => 'required',
         ]);

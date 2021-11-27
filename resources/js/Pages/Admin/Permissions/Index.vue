@@ -24,8 +24,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Created</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,14 +32,12 @@
                         <td class="font-weight-bold">{{ permission.id }}</td>
                         <td>{{ permission.name }}</td>
                         <td>{{ formatDate(permission.created_at) }}</td>
-                        <td>
-                            <a href="#">
-                                <i class="fas fa-edit" @click="openEditPermissionModal(permission)" style="color: #007bff"></i>
+                        <td class="max-w-0xl">
+                            <a class="mr-4" href="#">
+                                <i class="fas fa-edit fa-lg" @click="openEditPermissionModal(permission)" style="color: #007bff"></i>
                             </a>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmPermissionDeletion(permission)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmPermissionDeletion(permission)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -219,7 +216,9 @@
                             timer: 2500
                         })
                     },
-                    onFinish: () => this.form.reset(),
+                    onFinish: () => {
+                        this.form.reset()
+                    }
                 })
             },
             createPermission() {
@@ -255,6 +254,7 @@
                         })
                     },
                     onError: () => {
+                        this.resetForm = fals
                         Swal.fire({
                             position: 'top-end',
                             toast: 'true',
@@ -264,7 +264,11 @@
                             timer: 2500
                         })
                     },
-                    onFinish: () => this.form.reset(),
+                    onFinish: () => {
+                        if(!this.editPermissionModal) {
+                            this.form.reset()
+                        }
+                    }
                 })
             },
             closeModal() {

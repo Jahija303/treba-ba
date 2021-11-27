@@ -25,8 +25,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Status</th>
                         <th scope="col">City</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,17 +33,15 @@
                         <td class="font-weight-bold">{{ district.id }}</td>
                         <td>{{ district.name }}</td>
                         <td>{{ district.description }}</td>
-                        <td v-if="district.status === 1"><span class="badge badge-success">active</span></td>
-                        <td v-else-if="district.status === 0"><span class="badge badge-danger">inactive</span></td>
+                        <td v-if="district.status === 1"><h5><span class="badge badge-success">active</span></h5></td>
+                        <td v-else-if="district.status === 0"><h5><span class="badge badge-danger">inactive</span></h5></td>
                         <td>{{ district.city_name }}</td>
-                        <td>
-                            <a href="#">
-                                <i class="fas fa-edit" @click="openEditDistrictModal(district)" style="color: #007bff"></i>
+                        <td class="max-w-0xl">
+                            <a class="mr-4" href="#">
+                                <i class="fas fa-edit fa-lg" @click="openEditDistrictModal(district)" style="color: #007bff"></i>
                             </a>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmDeleteDistrict(district)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmDeleteDistrict(district)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -348,7 +345,9 @@ export default defineComponent({
                 },
                 onFinish: () => {
                     let cityVal = this.form.city_id
-                    this.form.reset()
+                    if(!this.editDistrictModal) {
+                        this.form.reset()
+                    }
                     this.city_id = cityVal
                     this.selectElement('citySelectEdit', cityVal)
                 },

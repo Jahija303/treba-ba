@@ -25,8 +25,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Population</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,16 +34,14 @@
                         <td>{{ city.name }}</td>
                         <td>{{ city.description }}</td>
                         <td>{{ city.population }}</td>
-                            <td v-if="city.status === 1"><span class="badge badge-success">active</span></td>
-                            <td v-else-if="city.status === 0"><span class="badge badge-danger">inactive</span></td>
-                        <td>
-                            <a href="#">
-                                <i class="fas fa-edit" @click="openEditCityModal(city)" style="color: #007bff"></i>
+                            <td v-if="city.status === 1"><h5><span class="badge badge-success">active</span></h5></td>
+                            <td v-else-if="city.status === 0"><h5><span class="badge badge-danger">inactive</span></h5></td>
+                        <td class="max-w-0xl">
+                            <a class="mr-4" href="#">
+                                <i class="fas fa-edit fa-lg" @click="openEditCityModal(city)" style="color: #007bff"></i>
                             </a>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmDeleteCity(city)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmDeleteCity(city)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -319,7 +316,11 @@ export default defineComponent({
                         timer: 2500
                     })
                 },
-                onFinish: () => this.form.reset(),
+                onFinish: () => {
+                    if(!this.editCityModal) {
+                        this.form.reset()
+                    }
+                }
             })
         },
         closeModal() {

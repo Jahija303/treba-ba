@@ -63,12 +63,11 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, $roleId)
     {
         $request->validate([
-            'name' => 'required',
             'permissions' => 'required',
         ]);
 
@@ -78,9 +77,7 @@ class RoleController extends Controller
         $permissions = collect($request->input('permissions'));
         $role->syncPermissions($permissions);
 
-        return Inertia::render('Admin/Roles/Index', [
-            'roles' => Role::all(),
-        ]);
+        return redirect()->route('admin.roles.index');
     }
 
     /**

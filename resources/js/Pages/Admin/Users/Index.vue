@@ -20,37 +20,34 @@
                 <table class="table table-hover">
                     <thead id="table-head">
                     <tr>
-                        <th>Id</th>
+                        <th>ID</th>
                         <th>Avatar</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Username</th>
                         <th>Role</th>
                         <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="user in users.data">
-                        <td class="font-weight-bold">{{ user.id }}</td>
-                        <td>
+                        <td class="font-weight-bold align-middle">{{ user.id }}</td>
+                        <td class="align-middle">
                             <img :src="user.profile_photo_url" :alt="user.firstname" class="rounded-full h-8 w-8 object-cover">
                         </td>
-                        <td>{{ user.firstname }} {{ user.lastname }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.username }}</td>
-                        <td><span span class="badge badge-primary">{{ getRoleName(user.id) }}</span></td>
-                        <td v-if="user.status === 1"><span class="badge badge-success">active</span></td>
-                        <td v-else-if="user.status === 0"><span class="badge badge-danger">inactive</span></td>
-                        <td>
-                            <a href="#">
-                                <i class="fas fa-edit" @click="openEditUserRoleModal(user)" style="color: #007bff"></i>
+                        <td class="align-middle">{{ user.firstname }} {{ user.lastname }}</td>
+                        <td class="align-middle">{{ user.email }}</td>
+                        <td class="align-middle">{{ user.username }}</td>
+                        <td class="align-middle"><h5><span span class="badge badge-primary">{{ getRoleName(user.id) }}</span></h5></td>
+                        <td class="align-middle" v-if="user.status === 1"><h5><span class="badge badge-success">active</span></h5></td>
+                        <td class="align-middle" v-else-if="user.status === 0"><h5><span class="badge badge-danger">inactive</span></h5></td>
+                        <td class="max-w-0xl align-middle">
+                            <a class="mr-4" href="#">
+                                <i class="fas fa-edit fa-lg" @click="openEditUserRoleModal(user)" style="color: #007bff"></i>
                             </a>
-                        </td>
-                        <td>
                             <a href="#">
-                                <i class="fas fa-trash-alt" @click="confirmDeleteUser(user)" style="color: #dc3545"></i>
+                                <i class="fas fa-trash-alt fa-lg" @click="confirmDeleteUser(user)" style="color: #dc3545"></i>
                             </a>
                         </td>
                     </tr>
@@ -180,7 +177,7 @@
                 </template>
             </jet-dialog-modal>
 
-            <!-- Edit District Modal -->
+            <!-- Edit User Modal -->
             <jet-dialog-modal :show="editUserRoleModal" @close="closeModal">
                 <template #title>
                     Edit User Role
@@ -200,6 +197,25 @@
                         </select>
 
                         <jet-input-error :message="form.errors.role" class="mt-2" />
+                    </div>
+
+                    <div class="mt-4">
+                        <jet-label value="Status*"/>
+                        <select id="statusSelect" class="mt-1 block w-100 border-gray-300
+                                    focus:border-indigo-300 focus:ring focus:ring-indigo-200
+                                    focus:ring-opacity-50 rounded-md shadow-sm"
+                                @change="selectedStatus($event)">
+                            <option :value="1"
+                                    :selected="this.form.status === 1">
+                                Active
+                            </option>
+                            <option :value="0"
+                                    :selected="this.form.status === 0">
+                                Inactive
+                            </option>
+                        </select>
+
+                        <jet-input-error :message="form.errors.status" class="mt-2" />
                     </div>
                 </template>
 
@@ -264,6 +280,7 @@ export default defineComponent({
                 username: '',
                 password: '',
                 role: 'user',
+                status: 1,
             }),
         }
     },
@@ -289,6 +306,9 @@ export default defineComponent({
         selectedRole(e) {
             this.form.role = e.target.value
         },
+        selectedStatus(e) {
+            this.form.status = e.target.value
+        },
         selectedCity(e) {
             this.form.city_id = e.target.value
         },
@@ -303,6 +323,7 @@ export default defineComponent({
         openEditUserRoleModal(user) {
             this.form.id = user.id
             this.form.role = this.getRoleName(user.id)
+            this.form.status = user.status
             this.editUserRoleModal = true
         },
         createUser() {
