@@ -21,10 +21,10 @@ class CreateLikesTable extends Migration
             $table->bigInteger('comment_reply_id')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('issue_id')->references('id')->on('issues');
-            $table->foreign('issue_comment_id')->references('id')->on('issue_comments');
-            $table->foreign('comment_reply_id')->references('id')->on('comment_replies');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
+            $table->foreign('issue_comment_id')->references('id')->on('issue_comments')->onDelete('cascade');
+            $table->foreign('comment_reply_id')->references('id')->on('comment_replies')->onDelete('cascade');
         });
     }
 

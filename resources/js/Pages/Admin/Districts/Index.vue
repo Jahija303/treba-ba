@@ -36,7 +36,7 @@
                         <td>{{ district.description }}</td>
                         <td v-if="district.status === 1"><span class="badge badge-success">active</span></td>
                         <td v-else-if="district.status === 0"><span class="badge badge-danger">inactive</span></td>
-                        <td>{{ getCityName(district.city_id) }}</td>
+                        <td>{{ district.city_name }}</td>
                         <td>
                             <a href="#">
                                 <i class="fas fa-edit" @click="openEditDistrictModal(district)" style="color: #007bff"></i>
@@ -242,15 +242,6 @@ export default defineComponent({
         selectElement(id, valueToSelect) {
             let element = document.getElementById(id);
             element.value = valueToSelect;
-        },
-        getCityName(cityId) {
-            let name
-            this.citiesList.forEach(element => {
-                if(element.id === cityId) {
-                    name = element.name
-                }
-            })
-            return name
         },
         selectedCity(e) {
             this.form.city_id = e.target.value

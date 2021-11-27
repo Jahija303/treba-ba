@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Issue;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -42,7 +43,7 @@ class IssueController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,7 +54,7 @@ class IssueController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Issue  $issue
+     * @param Issue $issue
      * @return \Illuminate\Http\Response
      */
     public function show(Issue $issue)
@@ -64,7 +65,7 @@ class IssueController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Issue  $issue
+     * @param Issue $issue
      * @return \Illuminate\Http\Response
      */
     public function edit(Issue $issue)
@@ -75,23 +76,33 @@ class IssueController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Issue $issue
+     * @return RedirectResponse
      */
-    public function update(Request $request, Issue $issue)
+    public function update(Request $request,$id): RedirectResponse
     {
-        //
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        $issue = Issue::find($id);
+        $issue->update([
+            'status' => $request->status,
+        ]);
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Issue  $issue
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy(Issue $issue)
+    public function destroy($id): RedirectResponse
     {
-        //
+        $issue = Issue::find($id);
+        $issue->delete();
+        return back();
     }
 }

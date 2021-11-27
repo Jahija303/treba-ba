@@ -20,8 +20,8 @@ class CreateIssueCommentsTable extends Migration
             $table->string('comment', 1000);
             $table->timestamps();
 
-            $table->foreign('issue_id')->references('id')->on('issues');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

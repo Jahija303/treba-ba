@@ -20,6 +20,10 @@ class DistrictController extends Controller
     {
         $districts = District::paginate(15);
 
+        foreach ($districts as $district) {
+            $district->city_name = $district->city->name;
+        }
+
         return Inertia::render('Admin/Districts/Index', [
             'districts' => $districts,
             'cities' => City::all()->toArray()

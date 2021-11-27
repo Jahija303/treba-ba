@@ -48,10 +48,7 @@
                             <td v-if="issue.status === 1"><span class="badge badge-success">active</span></td>
                             <td v-else-if="issue.status === 0"><span class="badge badge-danger">inactive</span></td>
                         <td>
-                            <button @click="flipIssueStatus(issue)" type="button" class="btn btn-primary">
-                                <i class="fas"></i>
-                                Flip status
-                            </button>
+                            <toggle-button @switched="statusUpdated" :id="issue.id" :defaultState="issue.status"/>
                         </td>
                         <td>
                             <a href="#">
@@ -64,6 +61,28 @@
 
                 <pagination class="mt-6 pb-4" :links="issues.links" />
             </div>
+
+            <!-- Delete Issue Confirmation Modal -->
+            <jet-dialog-modal :show="confirmIssueDeletion" @close="closeModal">
+                <template #title>
+                    Delete Issue
+                </template>
+
+                <template #content>
+                    Are you sure you want to delete this issue? Once this issue is deleted, all of its resources and data will be permanently deleted.
+                    Please confirm you would like to permanently delete this issue.
+                </template>
+
+                <template #footer>
+                    <jet-secondary-button @click="closeModal">
+                        Cancel
+                    </jet-secondary-button>
+
+                    <jet-danger-button class="ml-2" @click="deleteIssue" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Delete Issue
+                    </jet-danger-button>
+                </template>
+            </jet-dialog-modal>
 
         </template>
     </admin-layout>
@@ -84,9 +103,11 @@ import JetDropdown from '@/Jetstream/Dropdown.vue'
 import Swal from "sweetalert2";
 import Pagination from "@/Components/Pagination.vue";
 import JetLabel from "@/Jetstream/Label.vue"
+import ToggleButton from "../../../Jetstream/ToggleButton";
 
 export default defineComponent({
     components: {
+        ToggleButton,
         Link,
         AdminLayout,
         JetDangerButton,
@@ -101,14 +122,86 @@ export default defineComponent({
     },
     data() {
         return {
+            confirmIssueDeletion: false,
+
             form: this.$inertia.form({
                 id: '',
+                status: '',
             }),
         }
     },
     props: ['issues'],
     methods: {
+        statusUpdated(value, id) {
+            this.form.id = id
+            this.form.status = value
 
+            this.form.put(this.route('admin.issues.update', this.form.id, this.form), {
+                preserveScroll: true,
+                onSuccess: ()=> {
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'success',
+                        title: 'Issue status updated.',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onError: () => {
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'error',
+                        title: 'Error updating issue status',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onFinish: () => {
+                    this.form.reset()
+                },
+            })
+        },
+        confirmDeleteIssue(issue) {
+            this.form.id = issue.id
+            this.confirmIssueDeletion = true
+        },
+        deleteIssue() {
+            this.form.delete(this.route('admin.issues.destroy', this.form.id), {
+                preserveScroll: true,
+                onSuccess: ()=> {
+                    this.closeModal()
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'success',
+                        title: 'The selected issue has been deleted.',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onError: () => {
+                    this.closeModal()
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'error',
+                        title: 'Error deleting issue',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onFinish: () => {
+                    this.form.reset()
+                }
+            })
+        },
+        closeModal() {
+            this.confirmIssueDeletion = false
+            this.form.clearErrors()
+            this.form.reset()
+        },
     },
 })
 
