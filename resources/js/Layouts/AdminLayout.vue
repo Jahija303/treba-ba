@@ -13,7 +13,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <Sidebar></Sidebar>
+        <Sidebar :title="title"></Sidebar>
         <!-- /.sidebar -->
 
         <!-- Content Wrapper. Contains Header and Main page content -->

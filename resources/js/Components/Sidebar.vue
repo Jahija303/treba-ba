@@ -17,7 +17,9 @@
                          with font-awesome or any other icon font library -->
                     <li class="nav-header">MAIN</li>
                     <li class="nav-item">
-                        <Link :href="route('admin.dashboard.index')" class="nav-link">
+                        <Link :href="route('admin.dashboard.index')"
+                              v-bind:class="{ active: this.title === 'Dashboard' }"
+                              class="nav-link">
                             <i class="nav-icon fas fa-columns"></i>
                             <p>
                                 Dashboard
@@ -26,43 +28,57 @@
                     </li>
                     <li class="nav-header">TABLES</li>
                     <li class="nav-item">
-                        <Link :href="route('admin.users.index')" class="nav-link">
+                        <Link :href="route('admin.users.index')"
+                              v-bind:class="{ active: this.title === 'Users' }"
+                              class="nav-link">
                             <i class="fas fa-user-tag nav-icon"></i>
                             <p>Users</p>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('admin.roles.index')" class="nav-link">
+                        <Link :href="route('admin.roles.index')"
+                              v-bind:class="{ active: this.title === 'Roles' }"
+                              class="nav-link">
                             <i class="fas fa-user-tag nav-icon"></i>
                             <p>Roles</p>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('admin.permissions.index')" class="nav-link">
+                        <Link :href="route('admin.permissions.index')"
+                              v-bind:class="{ active: this.title === 'Permissions' }"
+                              class="nav-link">
                             <i class="fas fa-clipboard-check nav-icon"></i>
                             <p>Permissions</p>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('admin.issues.index')" class="nav-link">
+                        <Link :href="route('admin.issues.index')"
+                              v-bind:class="{ active: this.title === 'Issues' }"
+                              class="nav-link">
                             <i class="fas fa-bomb nav-icon"></i>
                             <p>Issues</p>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('admin.categories.index')" class="nav-link">
+                        <Link :href="route('admin.categories.index')"
+                              v-bind:class="{ active: this.title === 'Categories' }"
+                              class="nav-link">
                             <i class="fas fa-clipboard-list nav-icon"></i>
                             <p>Categories</p>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('admin.cities.index')" class="nav-link">
+                        <Link :href="route('admin.cities.index')"
+                              v-bind:class="{ active: this.title === 'Cities' }"
+                              class="nav-link">
                             <i class="fas fa-building nav-icon"></i>
                             <p>Cities</p>
                         </Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('admin.districts.index')" class="nav-link">
+                        <Link :href="route('admin.districts.index')"
+                              v-bind:class="{ active: this.title === 'Districts' }"
+                              class="nav-link">
                             <i class="fas fa-road nav-icon"></i>
                             <p>Districts</p>
                         </Link>
@@ -108,7 +124,9 @@ export default defineComponent({
     components: {
         Link,
     },
-
+    props: {
+        title: String,
+    },
     methods: {
         logout() {
             this.$inertia.post(route('logout'));
