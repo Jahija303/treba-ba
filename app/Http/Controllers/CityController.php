@@ -11,6 +11,13 @@ use Inertia\Response;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:add_city')->only(['store']);
+        $this->middleware('can:edit_city')->only(['update']);
+        $this->middleware('can:delete_city')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

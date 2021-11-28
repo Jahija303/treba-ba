@@ -37,7 +37,7 @@
                     </li>
                     <li class="nav-item">
                         <Link :href="route('admin.roles.index')"
-                              v-bind:class="{ active: this.title === 'Roles' }"
+                              v-bind:class="{ active: this.title === 'Roles' || this.title === 'Edit Role' }"
                               class="nav-link">
                             <i class="fas fa-user-tag nav-icon"></i>
                             <p>Roles</p>

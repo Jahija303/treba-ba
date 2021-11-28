@@ -11,6 +11,13 @@ use Inertia\Response;
 
 class DistrictController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:add_district')->only(['store']);
+        $this->middleware('can:edit_district')->only(['update']);
+        $this->middleware('can:delete_district')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -30,7 +30,7 @@ class CreateIssuesTable extends Migration
             $table->foreign("user_id")->references("id")->on("users");
             $table->foreign("city_id")->references("id")->on("cities");
             $table->foreign("category_id")->references("id")->on("categories");
-            $table->foreign("district_id")->references("id")->on("districts");
+            $table->foreign("district_id")->references("id")->on("districts")->onDelete('cascade');
         });
     }
 

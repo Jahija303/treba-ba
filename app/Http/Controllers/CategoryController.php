@@ -10,6 +10,13 @@ use Inertia\Response;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:add_category')->only(['store']);
+        $this->middleware('can:edit_category')->only(['update']);
+        $this->middleware('can:delete_category')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

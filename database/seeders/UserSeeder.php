@@ -21,6 +21,17 @@ class UserSeeder extends Seeder
         ])->assignRole('super-admin');
 
         User::create([
+            'firstname' => 'Local',
+            'lastname' => 'Admin',
+            'email' => 'localadmin@treba.ba',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'username' => 'localadmin',
+            'city_id' => 1,
+            'status' => 1,
+        ])->assignRole('local-admin');
+
+        User::create([
             'firstname' => 'test',
             'lastname' => 'user',
             'email' => 'user@treba.ba',

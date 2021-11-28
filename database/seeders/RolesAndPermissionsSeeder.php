@@ -42,6 +42,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::create(['name'=>'manage_roles']);
         Permission::create(['name'=>'manage_permissions']);
+        Permission::create(['name'=>'access_dashboard']);
 
         // Create roles
         Role::create(['name'=>'super-admin'])->givePermissionTo(Permission::all());
@@ -51,6 +52,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'add_district', 'view_district', 'edit_district', 'delete_district',
             'add_category', 'view_category', 'edit_category', 'delete_category',
             'view_issue', 'edit_issue']);
-        Role::create(['name'=>'user'])->givePermissionTo(['view_user']);
+        Role::create(['name'=>'user'])->givePermissionTo(['view_user','view_city','view_district','view_issue', 'view_category']);
     }
 }

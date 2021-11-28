@@ -10,6 +10,12 @@ use Inertia\Response;
 
 class IssueController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:edit_issue')->only(['update']);
+        $this->middleware('can:delete_issue')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *

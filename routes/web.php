@@ -27,11 +27,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Admin routes
 Route::prefix('admin')
     ->name('admin.')
-    ->middleware(['auth:sanctum', 'verified', 'role:super-admin'])
+    ->middleware(['auth:sanctum', 'verified', 'role:super-admin|local-admin'])
     ->group(function () {
 
         // Dashboard
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+        Route::get('dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard.index')
+            ->middleware(['can:access_dashboard']);
 
         // Users
         Route::resource('users', UserController::class)->only([
@@ -41,14 +43,14 @@ Route::prefix('admin')
         // Roles
         Route::resource('roles', RoleController::class)->only([
             'index', 'store', 'edit', 'update', 'destroy'
-        ]);
+        ])->middleware(['can:manage_roles']);
 
         // Permissions
         Route::resource('permissions', PermissionController::class)->only([
             'index', 'store', 'update', 'destroy'
-        ]);
+        ])->middleware(['can:manage_permissions']);
 
-        // Users
+        // Issues
         Route::resource('issues', IssueController::class)->only([
             'index', 'update', 'destroy'
         ]);

@@ -13,14 +13,14 @@
                             <!-- small box -->
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>150</h3>
+                                    <h3>{{ reported_issues }}</h3>
 
                                     <p>Reported Issues</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-exclamation-circle"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <Link :href="route('admin.issues.index')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -28,14 +28,14 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                    <h3>{{ resolve_rate }}%</h3>
 
                                     <p>Resolve Rate</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-file-signature"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <Link :href="route('admin.issues.index')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -43,14 +43,14 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>44</h3>
+                                    <h3>{{ user_registrations }}</h3>
 
                                     <p>User Registrations</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fas fa-users"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                                <Link :href="route('admin.users.index')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></Link>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -58,7 +58,7 @@
                             <!-- small box -->
                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>65</h3>
+                                    <h3>{{ user_registrations * 2 }}</h3>
 
                                     <p>Unique Visitors</p>
                                 </div>
@@ -131,12 +131,15 @@
 
 <script>
 import {defineComponent} from 'vue'
+import { Link } from '@inertiajs/inertia-vue3'
 import AdminLayout from "../../Layouts/AdminLayout";
 
 export default defineComponent({
     components: {
         AdminLayout,
+        Link,
     },
+    props: ['reported_issues', 'resolve_rate', 'user_registrations'],
     mounted() {
         this.connectedSortable()
         this.salesChart()
@@ -158,7 +161,6 @@ export default defineComponent({
             /* Chart.js Charts */
             // Sales chart
             let salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
-            //$('#revenue-chart').get(0).getContext('2d');
 
             let salesChartData = {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -221,13 +223,13 @@ export default defineComponent({
             let pieChartCanvas = document.getElementById('sales-chart-canvas').getContext('2d')
             let pieData = {
                 labels: [
-                    'Instore Sales',
-                    'Download Sales',
-                    'Mail-Order Sales'
+                    'Infrastructure',
+                    'Garbage Pollution',
+                    'Air Pollution'
                 ],
                 datasets: [
                     {
-                        data: [30, 12, 20],
+                        data: [3, 1, 2],
                         backgroundColor: ['#f56954', '#00a65a', '#f39c12']
                     }
                 ]
