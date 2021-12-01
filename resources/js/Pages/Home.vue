@@ -1,7 +1,7 @@
 <template>
 
     <!-- Header Section -->
-    <Header :can-login="canLogin" :can-register="canRegister"/>
+    <Header :can-login="canLogin" :can-register="canRegister" :dashboardAccess="dashboardAccess"/>
 
     <!-- Hero Section -->
     <Hero/>
@@ -16,6 +16,9 @@
 
         <!-- Counts Section -->
         <Counts/>
+
+        <!-- Portfolio Section -->
+        <Issues :issues="issues"/>
     </main>
 
 </template>
@@ -29,6 +32,7 @@
     import Featured from "../Components/LandingPage/Featured";
     import About from "../Components/LandingPage/About";
     import Counts from "../Components/LandingPage/Counts";
+    import Issues from "../Components/LandingPage/Issues";
 
     export default defineComponent({
         components: {
@@ -40,6 +44,7 @@
             Featured,
             About,
             Counts,
+            Issues,
         },
         mounted() {
             this.init()
@@ -199,41 +204,10 @@
                         }
                     }
                 });
-
-                /**
-                 * Porfolio isotope and filter
-                 */
-                window.addEventListener('load', () => {
-                    let portfolioContainer = select('.portfolio-container');
-                    if (portfolioContainer) {
-                        let portfolioIsotope = new Isotope(portfolioContainer, {
-                            itemSelector: '.portfolio-item'
-                        });
-
-                        let portfolioFilters = select('#portfolio-flters li', true);
-
-                        on('click', '#portfolio-flters li', function(e) {
-                            e.preventDefault();
-                            portfolioFilters.forEach(function(el) {
-                                el.classList.remove('filter-active');
-                            });
-                            this.classList.add('filter-active');
-
-                            portfolioIsotope.arrange({
-                                filter: this.getAttribute('data-filter')
-                            });
-
-                        }, true);
-                    }
-
-                });
             },
         },
 
-        props: {
-            canLogin: Boolean,
-            canRegister: Boolean,
-        }
+        props: ['canLogin', 'canRegister', 'issues', 'dashboardAccess'],
     })
 </script>
 
@@ -242,7 +216,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif !important;
     color: #444444;
 }
 

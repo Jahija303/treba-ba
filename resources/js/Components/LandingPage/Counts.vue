@@ -6,23 +6,23 @@
             <div class="row counters">
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Clients</p>
+                    <span>59</span>
+                    <p>Korisnika</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Projects</p>
+                    <span>67</span>
+                    <p>Riješenih problema</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Hours Of Support</p>
+                    <span>359</span>
+                    <p>Sati rada</p>
                 </div>
 
                 <div class="col-lg-3 col-6 text-center">
-                    <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Hard Workers</p>
+                    <span>8</span>
+                    <p>Administratora</p>
                 </div>
 
             </div>

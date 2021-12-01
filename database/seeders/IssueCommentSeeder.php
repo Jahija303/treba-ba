@@ -15,6 +15,6 @@ class IssueCommentSeeder extends Seeder
      */
     public function run()
     {
-        IssueComment::factory(30)->create()->unique;
+        IssueComment::factory(50)->create()->unique;
     }
 }

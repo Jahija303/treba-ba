@@ -14,6 +14,6 @@ class CommentReplySeeder extends Seeder
      */
     public function run()
     {
-        COmmentReply::factory(15)->create();
+        COmmentReply::factory(30)->create();
     }
 }

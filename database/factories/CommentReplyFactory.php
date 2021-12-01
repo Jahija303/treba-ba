@@ -22,7 +22,7 @@ class CommentReplyFactory extends Factory
     public function definition()
     {
         return [
-            'issue_comment_id' => $this->faker->numberBetween(1,30),
+            'issue_comment_id' => $this->faker->numberBetween(1,50),
             'user_id' => $this->faker->numberBetween(1,11),
             'reply' => $this->faker->paragraph(1),
         ];

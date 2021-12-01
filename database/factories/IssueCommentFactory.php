@@ -22,7 +22,7 @@ class IssueCommentFactory extends Factory
     public function definition()
     {
         return [
-            'issue_id' => $this->faker->numberBetween(1,4),
+            'issue_id' => $this->faker->numberBetween(1,8),
             'user_id' => $this->faker->numberBetween(1,11),
             'comment' => $this->faker->paragraph(2),
         ];

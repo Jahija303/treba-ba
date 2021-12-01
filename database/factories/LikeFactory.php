@@ -23,7 +23,7 @@ class LikeFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1,11),
-            'issue_id' => $this->faker->numberBetween(1,4)
+            'issue_id' => $this->faker->numberBetween(1,8)
         ];
     }
 }

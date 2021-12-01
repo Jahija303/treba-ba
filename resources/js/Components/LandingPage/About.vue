@@ -8,19 +8,17 @@
                     <img :src="'/storage/images/about.png'" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 content">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates</h3>
+                    <h3>Upoznajte naš tim mladih, motivisanih i neumorljivih studenata</h3>
                     <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                        Mi smo mladi tim studenata čija je kolektivna želja da napravimo bolju državu za sve nas
                     </p>
                     <ul>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda</li>
+                        <li><i class="bi bi-check-circle"></i> Pružamo vam kompletiranu platformu za prijavljivanje lokalnih problema</li>
+                        <li><i class="bi bi-check-circle"></i> Odobravanje svih prijava i filtriranje neprimjerenih sadržaja, ili govora mržnje</li>
+                        <li><i class="bi bi-check-circle"></i> 24/7 Podrška naših administratora</li>
                     </ul>
                     <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur.
+                        Ukoliko smatrate da ovo sve nije dovoljno, ili ako imate neih sugestija za poboljšavanje naše platforme, slobodno nas kontaktirajte!
                     </p>
                 </div>
             </div>

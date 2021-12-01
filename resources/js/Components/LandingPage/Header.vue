@@ -8,12 +8,13 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
+                    <li v-if="dashboardAccess"><Link :href="route('admin.dashboard.index')">Dashboard</Link></li>
                     <li><a class="nav-link scrollto active" href="#hero">Početna</a></li>
                     <li><a class="nav-link scrollto" href="#about">O nama</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Aktuelno</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Kontakt</a></li>
-                    <li><Link class="nav-link scrollto" :href="route('profile.show')">Račun</Link></li>
+                    <li><a class="nav-link scrollto" href="#issues">Aktuelno</a></li>
+                    <li><a class="nav-link scrollto " href="#contact">Kontakt</a></li>
 
+                    <li v-if="$page.props.user"><Link class="nav-link scrollto" :href="route('profile.show')">Moj Profil</Link></li>
                     <li v-if="canLogin && !$page.props.user"><Link class="nav-link scrollto" :href="route('login')">Login</Link></li>
                     <li v-if="canRegister && !$page.props.user"><Link class="getstarted scrollto" :href="route('register')">Registracija</Link></li>
                     <li v-if="$page.props.user"><Link @click="logout">Logout</Link></li>
@@ -34,10 +35,7 @@ export default defineComponent({
     components: {
         Link,
     },
-    props: {
-        canLogin: Boolean,
-        canRegister: Boolean,
-    },
+    props: ['canLogin', 'canRegister', 'dashboardAccess'],
     methods: {
         logout() {
             this.$inertia.post(route('logout'));
@@ -238,12 +236,14 @@ export default defineComponent({
     top: 55px;
     right: 15px;
     bottom: 15px;
-    left: 15px;
     padding: 10px 0;
     border-radius: 10px;
     background-color: #fff;
     overflow-y: auto;
     transition: 0.3s;
+    max-width: 30%;
+    max-height: 40%;
+    min-width: 30%;
 }
 .navbar-mobile a, .navbar-mobile a:focus {
     padding: 10px 20px;

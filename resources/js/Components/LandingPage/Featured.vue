@@ -8,22 +8,22 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="icon-box">
                         <div class="icon"><i class="bi bi-laptop"></i></div>
-                        <h4 class="title"><a href="#">Lorem Ipsum</a></h4>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        <h4 class="title"><a href="#">Šta nudimo ?</a></h4>
+                        <p class="description">Nudimo funkcionalnu platformu koja vam omogućava brzu i efikasnu prijavu bilo kakvog, primjećenog, problema u vašoj zajednici, koji se proslijeđuje zaduženim ovlastima.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
                     <div class="icon-box">
                         <div class="icon"><i class="bi bi-card-checklist"></i></div>
-                        <h4 class="title"><a href="#">Dolor Sitema</a></h4>
-                        <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        <h4 class="title"><a href="#">Vaša uloga</a></h4>
+                        <p class="description">Vaša uloga je da, jednostavno, koristite platformu i uključite što više prijatelja i poznanika na naš sistem, kako bi osigurali konstanto rastuću zajednicu.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
                     <div class="icon-box">
                         <div class="icon"><i class="bi bi-clipboard-data"></i></div>
-                        <h4 class="title"><a href="#">Sed ut perspiciatis</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <h4 class="title"><a href="#">Naš cilj</a></h4>
+                        <p class="description">Naš cilj je da omogućimo brzu i efikasnu prijavu i rješavanje problema naših gradova, bilo kojeg tipa, kako bi stvorili bolje sutra.   </p>
                     </div>
                 </div>
             </div>

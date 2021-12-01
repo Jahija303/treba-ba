@@ -7,9 +7,9 @@
             <div class="row">
                 <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
                     <h1>Primjetili ste problem u vašem gradu?</h1>
-                    <h2>Pridružite se našoj zajednici i postanite dio tima koji se zalaže za podizanje i razvijanje ekološke svijesti i zaštitu životne okoline </h2>
+                    <h2>Prijavite ga na našoj platformi i pridružite se zajednici koja se zalaže za podizanje i razvijanje bolje budućnosti naše Domovine</h2>
                     <div class="d-flex">
-                        <a href="#about" class="btn-get-started scrollto">Pridružite nam se</a>
+                        <a href="#about" class="btn-get-started scrollto">Pridruži nam se</a>
                         <a href="https://www.youtube.com/watch?v=Z6YjGldSD8A" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Pogledajte Video</span></a>
                     </div>
                 </div>
