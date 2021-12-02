@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
+use App\Models\City;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 use Laravel\Fortify\Contracts\LoginResponse;
+use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -37,6 +40,12 @@ class JetstreamServiceProvider extends ServiceProvider
             \Laravel\Fortify\Contracts\TwoFactorLoginResponse::class,
             \App\Http\Responses\LoginResponse::class
         );
+
+        Fortify::registerView(function () {
+            return Inertia::render('Auth/Register', [
+                'cities' => City::all()->toArray()
+            ]);
+        });
     }
 
     /**

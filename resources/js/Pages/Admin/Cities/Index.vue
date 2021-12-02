@@ -90,13 +90,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="createCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Create city
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="createCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Create city
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
 
@@ -159,13 +159,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="updateCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Update City
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="updateCity" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Update City
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
 

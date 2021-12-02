@@ -16,3 +16,16 @@
         }
     })
 </script>
+
+<style scoped>
+button {
+    transition: 0.5s;
+    background: #f10000;
+    box-shadow: 0 8px 28px rgba(217, 0, 0, 0.45);
+}
+button:hover {
+    background: #d90000;
+    color: #181818;
+    box-shadow: 0 8px 28px rgba(217, 0, 0, 0.45);
+}
+</style>

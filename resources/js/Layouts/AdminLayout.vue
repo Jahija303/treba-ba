@@ -84,3 +84,7 @@
         }
     })
 </script>
+
+<style lang="scss" scoped>
+@import 'public/css/adminlte.min.scss';
+</style>

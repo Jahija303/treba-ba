@@ -89,13 +89,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="createPermission" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Create permission
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="createPermission" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Create permission
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
 
@@ -119,13 +119,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="updatePermission" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Update permission
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="updatePermission" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Update permission
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
         </template>

@@ -53,6 +53,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetInputError from '@/Jetstream/InputError.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetCheckbox from '@/Jetstream/Checkbox.vue'
+import JetButton from '@/Jetstream/Button.vue'
 import _ from "lodash";
 import Swal from "sweetalert2";
 
@@ -63,6 +64,7 @@ export default defineComponent({
         JetInputError,
         JetLabel,
         JetCheckbox,
+        JetButton,
     },
     data() {
         return {

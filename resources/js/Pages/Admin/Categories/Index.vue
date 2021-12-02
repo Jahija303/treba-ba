@@ -98,13 +98,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="createCategory" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Create category
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="createCategory" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Create category
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
 
@@ -137,13 +137,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="updateCategory" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Update category
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="updateCategory" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Update category
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
         </template>

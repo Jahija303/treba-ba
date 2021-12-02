@@ -145,13 +145,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="createUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Add User
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="createUser" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Add User
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
 
@@ -220,13 +220,13 @@
                 </template>
 
                 <template #footer>
-                    <jet-button @click="closeModal">
+                    <jet-secondary-button @click="closeModal">
                         Cancel
-                    </jet-button>
-
-                    <jet-secondary-button class="ml-2" @click="updateUserRole" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Update User Role
                     </jet-secondary-button>
+
+                    <jet-button class="ml-2" @click="updateUserRole" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Update User Role
+                    </jet-button>
                 </template>
             </jet-dialog-modal>
 
@@ -238,7 +238,6 @@
 import { defineComponent } from 'vue'
 import AdminLayout from "../../../Layouts/AdminLayout";
 import { Link } from '@inertiajs/inertia-vue3'
-import moment from "moment";
 import JetDialogModal from '@/Jetstream/DialogModal.vue'
 import JetDangerButton from '@/Jetstream/DangerButton.vue'
 import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
