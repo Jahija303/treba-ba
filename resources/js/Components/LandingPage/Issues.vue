@@ -45,7 +45,8 @@
 
 <script>
 import { defineComponent } from 'vue'
-import moment from "moment";
+import moment from "moment"
+import VanillaTilt from 'vanilla-tilt'
 
 export default defineComponent({
     props: ['issues'],
@@ -54,11 +55,18 @@ export default defineComponent({
             return moment(date, 'YYYY-MM-DD').format('DD-MM-YYYY');
         },
     },
+    mounted() {
+        const element = document.querySelectorAll(".card");
+        VanillaTilt.init(element, {
+            max: 15,
+            speed: 3000,
+        });
+    },
     computed: {
         orderedIssues: function () {
             return _.orderBy(this.issues, 'numLikes', 'desc')
         }
-    }
+    },
 })
 </script>
 
@@ -81,6 +89,9 @@ export default defineComponent({
     transition: 0.5s ease;
     cursor: pointer;
     margin:30px;
+
+    transform-style: preserve-3d;
+    transform: translateZ(20px);
 }
 .card-image {
     grid-area: image;
@@ -145,8 +156,5 @@ export default defineComponent({
     font-weight: 400;
     text-transform: uppercase;
 }
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 2px 2px 17px rgba(0,0,0,0.3);
-}
+
 </style>

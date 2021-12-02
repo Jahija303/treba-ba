@@ -18,7 +18,7 @@
                         <li><i class="bi bi-check-circle"></i> 24/7 Podrška naših administratora</li>
                     </ul>
                     <p>
-                        Ukoliko smatrate da ovo sve nije dovoljno, ili ako imate neih sugestija za poboljšavanje naše platforme, slobodno nas kontaktirajte!
+                        Ukoliko smatrate da ovo sve nije dovoljno, ili ako imate nekih sugestija za poboljšavanje naše platforme, slobodno nas kontaktirajte!
                     </p>
                 </div>
             </div>

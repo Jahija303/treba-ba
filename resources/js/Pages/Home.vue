@@ -19,7 +19,18 @@
 
         <!-- Portfolio Section -->
         <Issues :issues="issues"/>
+
+        <!-- Cta Section -->
+        <Cta/>
+
+        <!-- Contact Section -->
+        <Contact/>
     </main>
+
+    <!-- Footer -->
+    <Footer />
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></a>
 
 </template>
 
@@ -33,6 +44,9 @@
     import About from "../Components/LandingPage/About";
     import Counts from "../Components/LandingPage/Counts";
     import Issues from "../Components/LandingPage/Issues";
+    import Cta from "../Components/LandingPage/Cta";
+    import Contact from "../Components/LandingPage/Contact";
+    import Footer from "../Components/LandingPage/Footer";
 
     export default defineComponent({
         components: {
@@ -45,6 +59,9 @@
             About,
             Counts,
             Issues,
+            Cta,
+            Contact,
+            Footer,
         },
         mounted() {
             this.init()

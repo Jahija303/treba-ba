@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "bootstrap-icons": "^1.7.1",
-        "sweetalert2": "^11.1.10"
+        "sweetalert2": "^11.1.10",
+        "vanilla-tilt": "^1.7.2"
     }
 }
