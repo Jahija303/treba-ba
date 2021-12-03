@@ -1,9 +1,5 @@
 <template>
     <div>
-        <Head :title="title" ></Head>
-
-        <jet-banner />
-
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -19,8 +15,8 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('admin.dashboard.index')" :active="route().current('admin.dashboard.index')">
-                                    Dashboard
+                                <jet-nav-link :href="route('home')" :active="route().current('home')">
+                                    Početna
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -82,7 +78,7 @@
                             </div>
 
                             <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
+                            <div class="ml-5 relative">
                                 <jet-dropdown align="right" width="48">
                                     <template #trigger>
                                         <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
@@ -103,15 +99,15 @@
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            Postavke
                                         </div>
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            Moj Račun
                                         </jet-dropdown-link>
 
                                         <jet-dropdown-link :href="route('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                            API Tokens
+                                            API Tokeni
                                         </jet-dropdown-link>
 
                                         <div class="border-t border-gray-100"></div>
@@ -141,12 +137,6 @@
 
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('admin.dashboard.index')" :active="route().current('admin.dashboard.index')">
-                            Dashboard
-                        </jet-responsive-nav-link>
-                    </div>
-
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
@@ -162,11 +152,11 @@
 
                         <div class="mt-3 space-y-1">
                             <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                                Moj račun
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
-                                API Tokens
+                                API Tokeni
                             </jet-responsive-nav-link>
 
                             <!-- Authentication -->
@@ -216,13 +206,6 @@
                 </div>
             </nav>
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header"></slot>
-                </div>
-            </header>
-
             <!-- Page Content -->
             <main>
                 <slot></slot>
@@ -242,9 +225,7 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
 
     export default defineComponent({
-        props: {
-            title: String,
-        },
+        props: ['title'],
 
         components: {
             Head,

@@ -19,13 +19,17 @@
 
 <style scoped>
 button {
-    transition: 0.5s;
-    background: white;
-    box-shadow: 0 8px 28px rgba(22, 223, 126, 0.45);
+    border: 0;
+    background: none;
+    font-size: 16px;
+    padding: 0 20px;
+    background: rgb(255, 255, 255);
+    color: #111111;
+    transition: 0.3s;
+    border-radius: 4px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 button:hover {
-    background: whitesmoke;
-    color: #181818;
-    box-shadow: 0 8px 28px rgba(32, 107, 251, 0.45);
+    background: rgba(255, 255, 255, 0.95);
 }
 </style>

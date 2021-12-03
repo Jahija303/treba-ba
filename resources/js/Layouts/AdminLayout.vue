@@ -1,5 +1,5 @@
 <template>
-    <Head :title="title" ></Head>
+    <Head :title="title"></Head>
 
     <div class="wrapper">
 
@@ -84,7 +84,3 @@
         }
     })
 </script>
-
-<style lang="scss" scoped>
-@import 'public/css/adminlte.min.scss';
-</style>

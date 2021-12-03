@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             IssueSeeder::class,
             IssueCommentSeeder::class,
             LikeSeeder::class,
-            CommentReplySeeder::class
+            CommentReplySeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }

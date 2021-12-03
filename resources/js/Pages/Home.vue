@@ -233,7 +233,6 @@
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: "Open Sans", sans-serif !important;
     color: #444444;
 }
 
@@ -245,10 +244,6 @@ a {
 a:hover {
     color: #206bfb;
     text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway", sans-serif;
 }
 
 .container {
