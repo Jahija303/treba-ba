@@ -31,27 +31,27 @@ class ImageSeeder extends Seeder
 
         DB::table('images')->insert([
             'issue_id' => '4',
-            'name' => '4.jpeg',
+            'name' => '4.jpg',
         ]);
 
         DB::table('images')->insert([
             'issue_id' => '5',
-            'name' => '1.jpeg',
+            'name' => '5.jpg',
         ]);
 
         DB::table('images')->insert([
             'issue_id' => '6',
-            'name' => '2.jpg',
+            'name' => '6.jpg',
         ]);
 
         DB::table('images')->insert([
             'issue_id' => '7',
-            'name' => '3.jpg',
+            'name' => '7.webp',
         ]);
 
         DB::table('images')->insert([
             'issue_id' => '8',
-            'name' => '4.jpeg',
+            'name' => '8.jpg',
         ]);
     }
 }

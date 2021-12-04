@@ -71,3 +71,13 @@ Route::prefix('admin')
         ]);
     }
 );
+
+// Public Issue routes
+Route::prefix('issues')
+    ->name('issues.')
+    ->middleware(['auth:sanctum', 'verified'])
+    ->group(function () {
+
+        Route::get('/report', [IssueController::class, 'create'])->name('report');
+
+    });

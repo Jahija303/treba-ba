@@ -13,12 +13,12 @@
                     <div v-for="issue in orderedIssues">
                         <div class="card">
                             <div class="card-image">
-                                <img :src="'/storage/images/error.jpg'" :alt="'/storage/images/error.jpg'">
+                                <img :src="'/storage/images/'+issue.image_name" alt="Error - Image not found">
                             </div>
                             <div class="card-text">
                                 <span class="date"><b>{{ this.formatDate(issue.created_at) }}</b></span>
                                 <h2>{{ issue.title }}</h2>
-                                <p>{{ issue.description }}</p>
+                                <p>{{ this.strippedDescription(issue.description) }}</p>
                             </div>
                             <div class="card-stats">
                                 <div class="stat">
@@ -54,6 +54,12 @@ export default defineComponent({
         formatDate : function (date) {
             return moment(date, 'YYYY-MM-DD').format('DD-MM-YYYY');
         },
+        strippedDescription: function (description) {
+            if (description.length > 150) {
+                return description.slice(0,145) + '...'
+            }
+            return description
+        },
     },
     mounted() {
         const element = document.querySelectorAll(".card");
@@ -65,7 +71,7 @@ export default defineComponent({
     computed: {
         orderedIssues: function () {
             return _.orderBy(this.issues, 'numLikes', 'desc')
-        }
+        },
     },
 })
 </script>

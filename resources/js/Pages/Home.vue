@@ -1,7 +1,7 @@
 <template>
 
     <!-- Header Section -->
-    <Header :can-login="canLogin" :can-register="canRegister" :dashboardAccess="dashboardAccess"/>
+    <Header :isHomePage="true" :can-login="canLogin" :can-register="canRegister" :dashboardAccess="dashboardAccess"/>
 
     <!-- Hero Section -->
     <Hero/>

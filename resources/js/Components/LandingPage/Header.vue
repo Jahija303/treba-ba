@@ -9,10 +9,17 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li v-if="dashboardAccess"><Link :href="route('admin.dashboard.index')">Dashboard</Link></li>
-                    <li><a class="nav-link scrollto active" href="#hero">Početna</a></li>
-                    <li><a class="nav-link scrollto" href="#about">O nama</a></li>
-                    <li><a class="nav-link scrollto" href="#issues">Aktuelno</a></li>
-                    <li><a class="nav-link scrollto " href="#contact">Kontakt</a></li>
+
+                    <!-- Custom header links if it is located on the homepage -->
+                    <li v-if="isHomePage"><a class="nav-link scrollto active" href="#hero">Početna</a></li>
+                    <li v-if="isHomePage"><a class="nav-link scrollto" href="#about">O nama</a></li>
+                    <li v-if="isHomePage"><a class="nav-link scrollto" href="#issues">Aktuelno</a></li>
+                    <li v-if="isHomePage"><a class="nav-link scrollto " href="#contact">Kontakt</a></li>
+                    <!-- Custom header links if it is located elsewhere -->
+                    <li v-if="!isHomePage"><Link class="nav-link scrollto" :href="route('home')">Početna</Link></li>
+                    <li v-if="!isHomePage"><Link class="nav-link scrollto" :href="route('home')">O nama</Link></li>
+                    <li v-if="!isHomePage"><Link class="nav-link scrollto" :href="route('home')">Aktuelno</Link></li>
+                    <li v-if="!isHomePage"><Link class="nav-link scrollto " :href="route('home')">Kontakt</Link></li>
 
                     <li v-if="canLogin && !$page.props.user"><Link class="nav-link scrollto" :href="route('login')">Login</Link></li>
                     <li v-if="canRegister && !$page.props.user"><Link class="getstarted scrollto" :href="route('register')">Registracija</Link></li>
@@ -83,7 +90,7 @@ export default defineComponent({
         JetDropdown,
         JetDropdownLink,
     },
-    props: ['canLogin', 'canRegister', 'dashboardAccess'],
+    props: ['canLogin', 'canRegister', 'dashboardAccess', 'isHomePage'],
     methods: {
         logout() {
             this.$inertia.post(route('logout'));

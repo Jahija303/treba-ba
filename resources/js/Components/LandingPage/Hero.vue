@@ -9,7 +9,12 @@
                     <h1>Primjetili ste problem u vašem gradu?</h1>
                     <h2>Prijavite ga na našoj platformi i pridružite se zajednici koja se zalaže za podizanje i razvijanje bolje budućnosti naše Domovine</h2>
                     <div class="d-flex">
-                        <a href="#about" class="btn-get-started scrollto">Pridruži nam se</a>
+                        <Link v-if="!$page.props.user" :href="route('register')" class="btn-get-started scrollto">
+                            <span>Pridruži nam se</span>
+                        </Link>
+                        <Link v-if="$page.props.user" :href="route('issues.report')" class="btn-get-started scrollto">
+                            <span>Prijavi Problem</span>
+                        </Link>
                         <a href="https://www.youtube.com/watch?v=Z6YjGldSD8A" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Pogledajte Video</span></a>
                     </div>
                 </div>
@@ -22,6 +27,17 @@
     </section><!-- End Hero -->
 
 </template>
+
+<script>
+import { defineComponent } from 'vue'
+import { Link } from '@inertiajs/inertia-vue3'
+
+export default defineComponent({
+    components: {
+        Link,
+    },
+})
+</script>
 
 <style scoped>
 

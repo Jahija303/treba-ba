@@ -53,4 +53,8 @@ class Issue extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+    public function images(){
+        return $this->hasMany(Image::class, 'issue_id');
+    }
 }

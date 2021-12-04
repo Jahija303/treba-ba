@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Issue;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -39,11 +41,27 @@ class IssueController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        if(Auth::user() == null) {
+            $canAccessDashboard = false;
+        } else {
+            if(Auth::user()->can('access_dashboard')) {
+                $canAccessDashboard = true;
+            } else {
+                $canAccessDashboard = false;
+            }
+        }
+
+        return Inertia::render('Issues/Report', [
+            [
+                'canLogin' => Route::has('login'),
+                'canRegister' => Route::has('register'),
+                'dashboardAccess' => $canAccessDashboard
+            ]
+        ]);
     }
 
     /**

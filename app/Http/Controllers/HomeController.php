@@ -17,6 +17,7 @@ class HomeController extends Controller
         foreach ($issues as $issue) {
             $issue->numLikes = $issue->likes()->count();
             $issue->numComments = $issue->comments()->count();
+            $issue->image_name = $issue->images()->first()->name;
         }
 
         if(Auth::user() == null) {
