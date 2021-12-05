@@ -7,7 +7,7 @@
                         <h1 class="m-0">Issues</h1>
                     </div>
                     <div class="col text-right">
-                        <Link href="#">
+                        <Link :href="route('issues.report')">
                             <button type="button" class="btn btn-primary">
                                 <i class="fas fa-folder-plus"></i>
                                 Add

@@ -28,7 +28,7 @@
                             <!-- small box -->
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>{{ resolve_rate }}%</h3>
+                                    <h3>{{ resolve_rate.toFixed(2) }}%</h3>
 
                                     <p>Resolve Rate</p>
                                 </div>

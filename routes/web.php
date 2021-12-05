@@ -79,5 +79,7 @@ Route::prefix('issues')
     ->group(function () {
 
         Route::get('/report', [IssueController::class, 'create'])->name('report');
+        Route::post('/report', [IssueController::class, 'store'])->name('store');
+        Route::get('/show/{id}', [IssueController::class, 'show'])->name('show');
 
     });

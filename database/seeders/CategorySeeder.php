@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'name' => 'Infrastructure',
+            'name' => 'Infrastruktura',
             'description' => 'Problems related to infrastructure',
             'status' => 1,
             'created_at' => now(),
@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Garbage Pollution',
+            'name' => 'Smeće',
             'description' => 'Problems related to garbage pollution',
             'status' => 1,
             'created_at' => now(),
@@ -31,7 +31,7 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Air Pollution',
+            'name' => 'Zagađenje Zraka',
             'description' => 'Problems related to air pollution',
             'status' => 1,
             'created_at' => now(),
@@ -39,7 +39,7 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Water Pollution',
+            'name' => 'Zagađenje Vode',
             'description' => 'Problems related to water pollution',
             'status' => 1,
             'created_at' => now(),
