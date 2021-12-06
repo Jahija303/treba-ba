@@ -37,7 +37,7 @@
                     <tbody>
                     <tr v-for="issue in issues.data">
                         <td class="font-weight-bold">{{ issue.id }}</td>
-                        <td>{{ issue.title }}</td>
+                        <td><Link :href="route('issues.show', issue.id)">{{ issue.title }}</Link></td>
                         <td>{{ issue.city_name }}</td>
                         <td>{{ issue.district_name }}</td>
                         <td>{{ issue.category_name }}</td>

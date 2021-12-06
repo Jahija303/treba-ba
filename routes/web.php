@@ -81,5 +81,6 @@ Route::prefix('issues')
         Route::get('/report', [IssueController::class, 'create'])->name('report');
         Route::post('/report', [IssueController::class, 'store'])->name('store');
         Route::get('/show/{id}', [IssueController::class, 'show'])->name('show');
+        Route::post('/comment', [IssueController::class, 'comment'])->name('comment');
 
     });

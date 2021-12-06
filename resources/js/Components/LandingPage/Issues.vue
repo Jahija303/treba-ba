@@ -10,7 +10,7 @@
 
             <div class="container">
                 <div class="row justify-content-center">
-                    <div v-for="issue in orderedIssues">
+                    <div v-for="issue in orderedIssues" @click="showIssue(issue.id)">
                         <div class="card">
                             <div class="card-image">
                                 <img :src="'/storage/images/'+issue.image_name" alt="Error - Image not found">
@@ -60,6 +60,9 @@ export default defineComponent({
             }
             return description
         },
+        showIssue(id) {
+            this.$inertia.get(this.route('issues.show', id))
+        }
     },
     mounted() {
         const element = document.querySelectorAll(".card");

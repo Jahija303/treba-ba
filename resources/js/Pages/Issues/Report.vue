@@ -81,7 +81,15 @@
                         <jet-input-error :message="form.errors.district_id" class="mt-2" />
                     </div>
 
+                    <!-- Image upload -->
+                    <div class="mt-4">
+                        <jet-label value="Slika"/>
+                        <input
+                            type="file"
+                            ref="photo"/>
 
+                        <jet-input-error :message="form.errors.district_id" class="mt-2" />
+                    </div>
 
                     <div class="mt-5">
                         <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -105,6 +113,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetInputError from '@/Jetstream/InputError.vue'
 import JetButton from '@/Jetstream/Button.vue'
+import Swal from "sweetalert2";
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyAZdwXBzrBmWr0oD9ZFC8_jaRD2us5GPmc'
 
@@ -117,6 +126,7 @@ export default defineComponent({
         JetInput,
         JetInputError,
         JetButton,
+        Swal,
     },
     data() {
         return {
@@ -129,6 +139,7 @@ export default defineComponent({
                 district_id: 1,
                 latitude: '',
                 longitude: '',
+                image: '',
             }),
 
             categoriesList: this.categories,
@@ -158,9 +169,41 @@ export default defineComponent({
                 this.form.latitude = this.selectedPos.lat
                 this.form.longitude = this.selectedPos.lng
             }
+            if (this.$refs.photo) {
+                this.form.image = this.$refs.photo.files[0];
+            }
             this.form.post(this.route('issues.store'), {
-                onFinish: () => console.log('Done'),
+                onSuccess:() => {
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'success',
+                        title: 'Problem uspješno prijavljen',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onError: () => {
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'error',
+                        title: 'Greška!',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onFinish: () => {
+                    this.form.reset()
+                    this.setDefaultFormValues()
+                }
             })
+        },
+        setDefaultFormValues() {
+            this.form.priority = 1
+            this.form.category_id = 1
+            this.form.city_id = 1
+            this.form.district_id = 1
         },
         selectedPriority(e) {
             this.form.priority = e.target.value

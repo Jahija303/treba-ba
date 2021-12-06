@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\District;
+use App\Models\Image;
 use App\Models\Issue;
+use App\Models\IssueComment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,7 +89,7 @@ class IssueController extends Controller
             'longitude' => 'required',
         ]);
 
-        Issue::create([
+        $issue = Issue::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
@@ -99,29 +101,80 @@ class IssueController extends Controller
             'longitude' => $request->longitude,
         ]);
 
+        $image_path = '';
+
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('images', 'public');
+        }
+
+        Image::create([
+            'issue_id' => $issue->id,
+            'name' => str_replace('images/', ' ', $image_path),
+        ]);
+
         return redirect(\route('home'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Issue $issue
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Response
      */
-    public function show(Issue $issue)
+    public function show($id): Response
     {
-        //
+        if(Auth::user() == null) {
+            $canAccessDashboard = false;
+        } else {
+            if(Auth::user()->can('access_dashboard')) {
+                $canAccessDashboard = true;
+            } else {
+                $canAccessDashboard = false;
+            }
+        }
+
+        $issue = Issue::find($id);
+        $issue->city_name = $issue->city->name;
+        $issue->district_name = $issue->district->name;
+        $issue->category_name = $issue->category->name;
+        $issue->user_username = $issue->user->username;
+        $issue->num_comments = $issue->comments->count();
+        $issue->all_comments = $issue->comments;
+        $issue->image = $issue->images->first()->name;
+
+        foreach ($issue->all_comments as $comment) {
+            $comment->username = $comment->user->username;
+            $comment->avatar = $comment->user->profile_photo_url;
+        }
+
+        return Inertia::render('Issues/Show', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'dashboardAccess' => $canAccessDashboard,
+            'issue' => $issue,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Issue $issue
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function edit(Issue $issue)
+    public function comment(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'issue_id' => 'required',
+            'comment' => 'required',
+        ]);
+
+        IssueComment::create([
+            'issue_id' => $request->issue_id,
+            'comment' => $request->comment,
+            'user_id' => Auth::id(),
+        ]);
+
+        return back();
     }
 
     /**
