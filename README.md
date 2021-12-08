@@ -2,8 +2,10 @@
 
 ## Admin
 
+```
 email: admin@treba.ba
 password: password
+```
 
 ## User
 
