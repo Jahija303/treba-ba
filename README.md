@@ -9,8 +9,10 @@ password: password
 
 ## User
 
+```
 email: user@treba.ba
 password: password
+```
 
 # Setup
 
