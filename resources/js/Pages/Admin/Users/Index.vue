@@ -27,6 +27,7 @@
                         <th>Username</th>
                         <th>Role</th>
                         <th>Status</th>
+                        <!--<th>Update</th>-->
                         <th></th>
                     </tr>
                     </thead>
@@ -42,6 +43,9 @@
                         <td class="align-middle"><h5><span span class="badge badge-primary">{{ getRoleName(user.id) }}</span></h5></td>
                         <td class="align-middle" v-if="user.status === 1"><h5><span class="badge badge-success">active</span></h5></td>
                         <td class="align-middle" v-else-if="user.status === 0"><h5><span class="badge badge-danger">inactive</span></h5></td>
+                        <!--<td class="pt-4 align-middle">
+                            <toggle-button @switched="statusUpdated" :id="user.id" :defaultState="user.status"/>
+                        </td>-->
                         <td class="max-w-0xl align-middle">
                             <a class="mr-4" href="#">
                                 <i class="fas fa-edit fa-lg" @click="openEditUserRoleModal(user)" style="color: #007bff"></i>
@@ -248,6 +252,7 @@ import JetDropdown from '@/Jetstream/Dropdown.vue'
 import Swal from "sweetalert2";
 import Pagination from "@/Components/Pagination.vue";
 import JetLabel from "@/Jetstream/Label.vue"
+import ToggleButton from "../../../Jetstream/ToggleButton";
 
 export default defineComponent({
     components: {
@@ -262,6 +267,7 @@ export default defineComponent({
         JetDropdown,
         Pagination,
         JetLabel,
+        ToggleButton,
     },
     data() {
         return {
@@ -285,6 +291,37 @@ export default defineComponent({
     },
     props: ['users', 'user_roles', 'roles', 'cities'],
     methods: {
+        statusUpdated(value, id) {
+            this.form.id = id
+            this.form.status = value
+
+            this.form.put(this.route('admin.users.update_status', this.form.id, this.form), {
+                preserveScroll: true,
+                onSuccess: ()=> {
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'success',
+                        title: 'User status updated.',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onError: () => {
+                    Swal.fire({
+                        position: 'top-end',
+                        toast: 'true',
+                        icon: 'error',
+                        title: 'Error updating user status',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                },
+                onFinish: () => {
+                    this.form.reset()
+                },
+            })
+        },
         getRoleName(userId) {
             let name
             this.user_roles.forEach(element => {

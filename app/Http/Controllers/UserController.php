@@ -99,6 +99,25 @@ class UserController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function update_status(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        User::find($id)->update([
+            'status' => $request->status,
+        ]);
+        return back();
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param int $id
@@ -106,8 +125,7 @@ class UserController extends Controller
      */
     public function destroy(int $id): RedirectResponse
     {
-        User::where('id',$id)
-            ->update(['status' => 0]);
+        User::find($id)->delete();
         return back();
     }
 }

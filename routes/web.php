@@ -40,6 +40,10 @@ Route::prefix('admin')
             'index', 'store', 'update', 'destroy'
         ]);
 
+        Route::put('users.update_status', [UserController::class, 'update_status'])
+            ->name('users.update_status')
+            ->middleware(['can:edit_user']);
+
         // Roles
         Route::resource('roles', RoleController::class)->only([
             'index', 'store', 'edit', 'update', 'destroy'

@@ -303,4 +303,9 @@ export default defineComponent({
 .comment-link:hover {
     color: rgb(23, 154, 91);
 }
+
+.user-img {
+    max-width: 55px;
+    max-height: 55px;
+}
 </style>

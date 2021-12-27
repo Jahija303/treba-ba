@@ -144,7 +144,7 @@ export default defineComponent({
 
             categoriesList: this.categories,
             citiesList: this.cities,
-            districtsList: this.districts.filter((district) => district.city_id == 1),
+            districtsList: this.districts.filter((district) => district.city_id === 1),
 
             priorities: [
                 {

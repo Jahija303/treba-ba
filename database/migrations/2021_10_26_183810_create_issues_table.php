@@ -27,7 +27,7 @@ class CreateIssuesTable extends Migration
             $table->boolean("status")->default(0);
             $table->timestamps();
 
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->foreign("city_id")->references("id")->on("cities");
             $table->foreign("category_id")->references("id")->on("categories");
             $table->foreign("district_id")->references("id")->on("districts")->onDelete('cascade');

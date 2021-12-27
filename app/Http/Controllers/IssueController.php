@@ -109,7 +109,7 @@ class IssueController extends Controller
 
         Image::create([
             'issue_id' => $issue->id,
-            'name' => str_replace('images/', ' ', $image_path),
+            'name' => str_replace('images/', '',$image_path),
         ]);
 
         return redirect(\route('home'));
@@ -205,8 +205,7 @@ class IssueController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $issue = Issue::find($id);
-        $issue->delete();
+        Issue::find($id)->delete();
         return back();
     }
 }

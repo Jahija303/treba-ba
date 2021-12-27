@@ -1,4 +1,4 @@
-/*! tailwindcss v2.2.17 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
 Document
@@ -796,6 +796,39 @@ select {
 [type='file']:focus {
 	outline: 1px auto -webkit-focus-ring-color;
 }
+.container {
+	width: 100%;
+}
+@media (min-width: 640px) {
+
+	.container {
+		max-width: 640px;
+	}
+}
+@media (min-width: 768px) {
+
+	.container {
+		max-width: 768px;
+	}
+}
+@media (min-width: 1024px) {
+
+	.container {
+		max-width: 1024px;
+	}
+}
+@media (min-width: 1280px) {
+
+	.container {
+		max-width: 1280px;
+	}
+}
+@media (min-width: 1536px) {
+
+	.container {
+		max-width: 1536px;
+	}
+}
 .prose {
 	color: #374151;
 	max-width: 65ch;
@@ -1108,12 +1141,28 @@ select {
 .z-40 {
 	z-index: 40;
 }
+.order-2 {
+	order: 2;
+}
+.order-1 {
+	order: 1;
+}
 .col-span-6 {
 	grid-column: span 6 / span 6;
+}
+.float-right {
+	float: right;
+}
+.m-0 {
+	margin: 0px;
 }
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
+}
+.my-3 {
+	margin-top: 0.75rem;
+	margin-bottom: 0.75rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
@@ -1187,6 +1236,36 @@ select {
 .-mt-px {
 	margin-top: -1px;
 }
+.ml-auto {
+	margin-left: auto;
+}
+.-mb-1 {
+	margin-bottom: -0.25rem;
+}
+.mb-1 {
+	margin-bottom: 0.25rem;
+}
+.mr-1 {
+	margin-right: 0.25rem;
+}
+.mb-2 {
+	margin-bottom: 0.5rem;
+}
+.ml-5 {
+	margin-left: 1.25rem;
+}
+.mb-0 {
+	margin-bottom: 0px;
+}
+.mr-5 {
+	margin-right: 1.25rem;
+}
+.mt-0 {
+	margin-top: 0px;
+}
+.mr-4 {
+	margin-right: 1rem;
+}
 .block {
 	display: block;
 }
@@ -1195,6 +1274,9 @@ select {
 }
 .inline-flex {
 	display: inline-flex;
+}
+.table {
+	display: table;
 }
 .grid {
 	display: grid;
@@ -1541,6 +1623,9 @@ select {
 .p-6 {
 	padding: 1.5rem;
 }
+.p-0 {
+	padding: 0px;
+}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -1630,6 +1715,12 @@ select {
 .pt-8 {
 	padding-top: 2rem;
 }
+.pl-0 {
+	padding-left: 0px;
+}
+.pr-0 {
+	padding-right: 0px;
+}
 .text-left {
 	text-align: left;
 }
@@ -1638,6 +1729,9 @@ select {
 }
 .text-right {
 	text-align: right;
+}
+.align-middle {
+	vertical-align: middle;
 }
 .font-sans {
 	font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -1889,6 +1983,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
+.hover\:bg-white:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -1936,6 +2034,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
 }
+.focus\:border-indigo-500:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+}
 .focus\:bg-indigo-600:focus {
 	--tw-bg-opacity: 1;
 	background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
@@ -1971,6 +2073,10 @@ select {
 .focus\:text-gray-500:focus {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+.focus\:text-indigo-500:focus {
+	--tw-text-opacity: 1;
+	color: rgba(99, 102, 241, var(--tw-text-opacity));
 }
 .focus\:outline-none:focus {
 	outline: 2px solid transparent;
